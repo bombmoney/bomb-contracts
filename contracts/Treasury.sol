@@ -47,8 +47,8 @@ contract Treasury is ContractGuard {
 
     // exclusions from total supply
     address[] public excludedFromTotalSupply = [
-        address(0x9A896d3c54D7e45B558BD5fFf26bF1E8C031F93b), // TombGenesisPool
-        address(0xa7b9123f4b15fE0fF01F469ff5Eab2b41296dC0E), // new TombRewardPool
+        address(0x2b0338cd8483Fd139951173FF7e560Da0Fc281d1), // TombGenesisPool
+        address(0xE7310adf7A43B7B4cc673e1DD0Faa468946Cc898), // new TombRewardPool
         address(0xA7B16703470055881e7EE093e9b0bF537f29CD4d) // old TombRewardPool
     ];
 
@@ -112,13 +112,13 @@ contract Treasury is ContractGuard {
         _;
     }
 
-    modifier checkCondition {
+    modifier checkCondition() {
         require(now >= startTime, "Treasury: not started yet");
 
         _;
     }
 
-    modifier checkEpoch {
+    modifier checkEpoch() {
         require(now >= nextEpochPoint(), "Treasury: not opened yet");
 
         _;
@@ -127,7 +127,7 @@ contract Treasury is ContractGuard {
         epochSupplyContractionLeft = (getTombPrice() > tombPriceCeiling) ? 0 : getTombCirculatingSupply().mul(maxSupplyContractionPercent).div(10000);
     }
 
-    modifier checkOperator {
+    modifier checkOperator() {
         require(
             IBasisAsset(tomb).operator() == address(this) &&
                 IBasisAsset(tbond).operator() == address(this) &&
@@ -139,7 +139,7 @@ contract Treasury is ContractGuard {
         _;
     }
 
-    modifier notInitialized {
+    modifier notInitialized() {
         require(!initialized, "Treasury: already initialized");
 
         _;

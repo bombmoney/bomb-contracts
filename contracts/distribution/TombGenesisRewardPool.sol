@@ -49,15 +49,15 @@ contract TombGenesisRewardPool {
     uint256 public poolEndTime;
 
     // TESTNET
-    uint256 public tombPerSecond = 3.0555555 ether; // 11000 TOMB / (1h * 60min * 60s)
-    uint256 public runningTime = 24 hours; // 1 hours
-    uint256 public constant TOTAL_REWARDS = 11000 ether;
+    // uint256 public tombPerSecond = 3.0555555 ether; // 11000 TOMB / (1h * 60min * 60s)
+    // uint256 public runningTime = 24 hours; // 1 hours
+    // uint256 public constant TOTAL_REWARDS = 11000 ether;
     // END TESTNET
 
     // MAINNET
-    // uint256 public tombPerSecond = 0.11574 ether; // 10000 TOMB / (24h * 60min * 60s)
-    // uint256 public runningTime = 1 days; // 1 days
-    // uint256 public constant TOTAL_REWARDS = 10000 ether;
+    uint256 public tombPerSecond = 0.11574 ether; // 10000 TOMB / (24h * 60min * 60s)
+    uint256 public runningTime = 1 days; // 1 days
+    uint256 public constant TOTAL_REWARDS = 10000 ether;
     // END MAINNET
 
     event Deposit(address indexed user, uint256 indexed pid, uint256 amount);
@@ -116,16 +116,8 @@ contract TombGenesisRewardPool {
                 _lastRewardTime = block.timestamp;
             }
         }
-        bool _isStarted =
-        (_lastRewardTime <= poolStartTime) ||
-        (_lastRewardTime <= block.timestamp);
-        poolInfo.push(PoolInfo({
-            token : _token,
-            allocPoint : _allocPoint,
-            lastRewardTime : _lastRewardTime,
-            accTombPerShare : 0,
-            isStarted : _isStarted
-            }));
+        bool _isStarted = (_lastRewardTime <= poolStartTime) || (_lastRewardTime <= block.timestamp);
+        poolInfo.push(PoolInfo({token: _token, allocPoint: _allocPoint, lastRewardTime: _lastRewardTime, accTombPerShare: 0, isStarted: _isStarted}));
         if (_isStarted) {
             totalAllocPoint = totalAllocPoint.add(_allocPoint);
         }
@@ -136,9 +128,7 @@ contract TombGenesisRewardPool {
         massUpdatePools();
         PoolInfo storage pool = poolInfo[_pid];
         if (pool.isStarted) {
-            totalAllocPoint = totalAllocPoint.sub(pool.allocPoint).add(
-                _allocPoint
-            );
+            totalAllocPoint = totalAllocPoint.sub(pool.allocPoint).add(_allocPoint);
         }
         pool.allocPoint = _allocPoint;
     }
@@ -217,7 +207,7 @@ contract TombGenesisRewardPool {
         }
         if (_amount > 0) {
             pool.token.safeTransferFrom(_sender, address(this), _amount);
-            if(address(pool.token) == shiba) {
+            if (address(pool.token) == shiba) {
                 user.amount = user.amount.add(_amount.mul(9900).div(10000));
             } else {
                 user.amount = user.amount.add(_amount);
@@ -274,7 +264,11 @@ contract TombGenesisRewardPool {
         operator = _operator;
     }
 
-    function governanceRecoverUnsupported(IERC20 _token, uint256 amount, address to) external onlyOperator {
+    function governanceRecoverUnsupported(
+        IERC20 _token,
+        uint256 amount,
+        address to
+    ) external onlyOperator {
         if (block.timestamp < poolEndTime + 90 days) {
             // do not allow to drain core token (TOMB or lps) if less than 90 days after pool ends
             require(_token != tomb, "tomb");

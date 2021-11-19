@@ -74,7 +74,7 @@ contract TaxOfficeV2 is Operator {
         }
     }
 
-    function taxRate() external view returns (uint256) {
+    function taxRate() external returns (uint256) {
         return ITaxable(tomb).taxRate();
     }
 
@@ -116,10 +116,10 @@ contract TaxOfficeV2 is Operator {
             block.timestamp
         );
 
-        if(amtTomb.sub(resultAmtTomb) > 0) {
+        if (amtTomb.sub(resultAmtTomb) > 0) {
             IERC20(tomb).transfer(msg.sender, amtTomb.sub(resultAmtTomb));
         }
-        if(amtToken.sub(resultAmtToken) > 0) {
+        if (amtToken.sub(resultAmtToken) > 0) {
             IERC20(token).transfer(msg.sender, amtToken.sub(resultAmtToken));
         }
         return (resultAmtTomb, resultAmtToken, liquidity);
@@ -158,7 +158,7 @@ contract TaxOfficeV2 is Operator {
             block.timestamp
         );
 
-        if(amtTomb.sub(resultAmtTomb) > 0) {
+        if (amtTomb.sub(resultAmtTomb) > 0) {
             IERC20(tomb).transfer(msg.sender, amtTomb.sub(resultAmtTomb));
         }
         return (resultAmtTomb, resultAmtFtm, liquidity);

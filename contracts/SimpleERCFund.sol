@@ -2,11 +2,11 @@
 
 pragma solidity ^0.6.0;
 
-import '@openzeppelin/contracts/token/ERC20/IERC20.sol';
-import '@openzeppelin/contracts/token/ERC20/SafeERC20.sol';
+import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 
-import './owner/Operator.sol';
-import './interfaces/ISimpleERCFund.sol';
+import "./owner/Operator.sol";
+import "./interfaces/ISimpleERCFund.sol";
 
 contract SimpleERCFund is ISimpleERCFund, Operator {
     using SafeERC20 for IERC20;
@@ -31,10 +31,5 @@ contract SimpleERCFund is ISimpleERCFund, Operator {
     }
 
     event Deposit(address indexed from, uint256 indexed at, string reason);
-    event Withdrawal(
-        address indexed from,
-        address indexed to,
-        uint256 indexed at,
-        string reason
-    );
+    event Withdrawal(address indexed from, address indexed to, uint256 indexed at, string reason);
 }
