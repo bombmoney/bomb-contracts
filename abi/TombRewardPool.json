@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_tomb",
+        "name": "_bomb",
         "type": "address"
       },
       {
@@ -195,7 +195,7 @@
         "type": "uint256"
       }
     ],
-    "name": "epochTombPerSecond",
+    "name": "epochBombPerSecond",
     "outputs": [
       {
         "internalType": "uint256",
@@ -305,7 +305,7 @@
         "type": "address"
       }
     ],
-    "name": "pendingTOMB",
+    "name": "pendingBOMB",
     "outputs": [
       {
         "internalType": "uint256",
@@ -343,7 +343,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "accTombPerShare",
+        "name": "accBombPerShare",
         "type": "uint256"
       },
       {
@@ -401,7 +401,7 @@
   },
   {
     "inputs": [],
-    "name": "tomb",
+    "name": "bomb",
     "outputs": [
       {
         "internalType": "contract IERC20",

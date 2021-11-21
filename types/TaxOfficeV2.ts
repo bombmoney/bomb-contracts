@@ -22,6 +22,7 @@ export interface TaxOfficeV2Interface extends utils.Interface {
   functions: {
     "addLiquidityETHTaxFree(uint256,uint256,uint256)": FunctionFragment;
     "addLiquidityTaxFree(address,uint256,uint256,uint256,uint256)": FunctionFragment;
+    "bomb()": FunctionFragment;
     "disableAutoCalculateTax()": FunctionFragment;
     "enableAutoCalculateTax()": FunctionFragment;
     "excludeAddressFromTax(address)": FunctionFragment;
@@ -36,16 +37,15 @@ export interface TaxOfficeV2Interface extends utils.Interface {
     "setTaxRate(uint256)": FunctionFragment;
     "setTaxTiersRate(uint8,uint256)": FunctionFragment;
     "setTaxTiersTwap(uint8,uint256)": FunctionFragment;
-    "setTaxableTombOracle(address)": FunctionFragment;
+    "setTaxableBombOracle(address)": FunctionFragment;
     "taxExclusionEnabled(address)": FunctionFragment;
     "taxFreeTransferFrom(address,address,uint256)": FunctionFragment;
     "taxRate()": FunctionFragment;
-    "tomb()": FunctionFragment;
     "transferOperator(address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "transferTaxOffice(address)": FunctionFragment;
     "uniRouter()": FunctionFragment;
-    "wftm()": FunctionFragment;
+    "weth()": FunctionFragment;
   };
 
   encodeFunctionData(
@@ -56,6 +56,7 @@ export interface TaxOfficeV2Interface extends utils.Interface {
     functionFragment: "addLiquidityTaxFree",
     values: [string, BigNumberish, BigNumberish, BigNumberish, BigNumberish]
   ): string;
+  encodeFunctionData(functionFragment: "bomb", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "disableAutoCalculateTax",
     values?: undefined
@@ -107,7 +108,7 @@ export interface TaxOfficeV2Interface extends utils.Interface {
     values: [BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "setTaxableTombOracle",
+    functionFragment: "setTaxableBombOracle",
     values: [string]
   ): string;
   encodeFunctionData(
@@ -119,7 +120,6 @@ export interface TaxOfficeV2Interface extends utils.Interface {
     values: [string, string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "taxRate", values?: undefined): string;
-  encodeFunctionData(functionFragment: "tomb", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "transferOperator",
     values: [string]
@@ -133,7 +133,7 @@ export interface TaxOfficeV2Interface extends utils.Interface {
     values: [string]
   ): string;
   encodeFunctionData(functionFragment: "uniRouter", values?: undefined): string;
-  encodeFunctionData(functionFragment: "wftm", values?: undefined): string;
+  encodeFunctionData(functionFragment: "weth", values?: undefined): string;
 
   decodeFunctionResult(
     functionFragment: "addLiquidityETHTaxFree",
@@ -143,6 +143,7 @@ export interface TaxOfficeV2Interface extends utils.Interface {
     functionFragment: "addLiquidityTaxFree",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "bomb", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "disableAutoCalculateTax",
     data: BytesLike
@@ -188,7 +189,7 @@ export interface TaxOfficeV2Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setTaxableTombOracle",
+    functionFragment: "setTaxableBombOracle",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -200,7 +201,6 @@ export interface TaxOfficeV2Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "taxRate", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "tomb", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOperator",
     data: BytesLike
@@ -214,7 +214,7 @@ export interface TaxOfficeV2Interface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "uniRouter", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "wftm", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "weth", data: BytesLike): Result;
 
   events: {
     "OperatorTransferred(address,address)": EventFragment;
@@ -269,20 +269,22 @@ export interface TaxOfficeV2 extends BaseContract {
 
   functions: {
     addLiquidityETHTaxFree(
-      amtTomb: BigNumberish,
-      amtTombMin: BigNumberish,
-      amtFtmMin: BigNumberish,
+      amtBomb: BigNumberish,
+      amtBombMin: BigNumberish,
+      amtEthMin: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
     addLiquidityTaxFree(
       token: string,
-      amtTomb: BigNumberish,
+      amtBomb: BigNumberish,
       amtToken: BigNumberish,
-      amtTombMin: BigNumberish,
+      amtBombMin: BigNumberish,
       amtTokenMin: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
+
+    bomb(overrides?: CallOverrides): Promise<[string]>;
 
     disableAutoCalculateTax(
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -345,8 +347,8 @@ export interface TaxOfficeV2 extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setTaxableTombOracle(
-      _tombOracle: string,
+    setTaxableBombOracle(
+      _bombOracle: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -366,8 +368,6 @@ export interface TaxOfficeV2 extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    tomb(overrides?: CallOverrides): Promise<[string]>;
-
     transferOperator(
       newOperator_: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -385,24 +385,26 @@ export interface TaxOfficeV2 extends BaseContract {
 
     uniRouter(overrides?: CallOverrides): Promise<[string]>;
 
-    wftm(overrides?: CallOverrides): Promise<[string]>;
+    weth(overrides?: CallOverrides): Promise<[string]>;
   };
 
   addLiquidityETHTaxFree(
-    amtTomb: BigNumberish,
-    amtTombMin: BigNumberish,
-    amtFtmMin: BigNumberish,
+    amtBomb: BigNumberish,
+    amtBombMin: BigNumberish,
+    amtEthMin: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
   addLiquidityTaxFree(
     token: string,
-    amtTomb: BigNumberish,
+    amtBomb: BigNumberish,
     amtToken: BigNumberish,
-    amtTombMin: BigNumberish,
+    amtBombMin: BigNumberish,
     amtTokenMin: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  bomb(overrides?: CallOverrides): Promise<string>;
 
   disableAutoCalculateTax(
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -465,8 +467,8 @@ export interface TaxOfficeV2 extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  setTaxableTombOracle(
-    _tombOracle: string,
+  setTaxableBombOracle(
+    _bombOracle: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -486,8 +488,6 @@ export interface TaxOfficeV2 extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  tomb(overrides?: CallOverrides): Promise<string>;
-
   transferOperator(
     newOperator_: string,
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -505,24 +505,26 @@ export interface TaxOfficeV2 extends BaseContract {
 
   uniRouter(overrides?: CallOverrides): Promise<string>;
 
-  wftm(overrides?: CallOverrides): Promise<string>;
+  weth(overrides?: CallOverrides): Promise<string>;
 
   callStatic: {
     addLiquidityETHTaxFree(
-      amtTomb: BigNumberish,
-      amtTombMin: BigNumberish,
-      amtFtmMin: BigNumberish,
+      amtBomb: BigNumberish,
+      amtBombMin: BigNumberish,
+      amtEthMin: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber, BigNumber]>;
 
     addLiquidityTaxFree(
       token: string,
-      amtTomb: BigNumberish,
+      amtBomb: BigNumberish,
       amtToken: BigNumberish,
-      amtTombMin: BigNumberish,
+      amtBombMin: BigNumberish,
       amtTokenMin: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber, BigNumber, BigNumber]>;
+
+    bomb(overrides?: CallOverrides): Promise<string>;
 
     disableAutoCalculateTax(overrides?: CallOverrides): Promise<void>;
 
@@ -579,8 +581,8 @@ export interface TaxOfficeV2 extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    setTaxableTombOracle(
-      _tombOracle: string,
+    setTaxableBombOracle(
+      _bombOracle: string,
       overrides?: CallOverrides
     ): Promise<void>;
 
@@ -597,8 +599,6 @@ export interface TaxOfficeV2 extends BaseContract {
     ): Promise<void>;
 
     taxRate(overrides?: CallOverrides): Promise<BigNumber>;
-
-    tomb(overrides?: CallOverrides): Promise<string>;
 
     transferOperator(
       newOperator_: string,
@@ -617,7 +617,7 @@ export interface TaxOfficeV2 extends BaseContract {
 
     uniRouter(overrides?: CallOverrides): Promise<string>;
 
-    wftm(overrides?: CallOverrides): Promise<string>;
+    weth(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
@@ -642,20 +642,22 @@ export interface TaxOfficeV2 extends BaseContract {
 
   estimateGas: {
     addLiquidityETHTaxFree(
-      amtTomb: BigNumberish,
-      amtTombMin: BigNumberish,
-      amtFtmMin: BigNumberish,
+      amtBomb: BigNumberish,
+      amtBombMin: BigNumberish,
+      amtEthMin: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
     addLiquidityTaxFree(
       token: string,
-      amtTomb: BigNumberish,
+      amtBomb: BigNumberish,
       amtToken: BigNumberish,
-      amtTombMin: BigNumberish,
+      amtBombMin: BigNumberish,
       amtTokenMin: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
+
+    bomb(overrides?: CallOverrides): Promise<BigNumber>;
 
     disableAutoCalculateTax(
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -718,8 +720,8 @@ export interface TaxOfficeV2 extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    setTaxableTombOracle(
-      _tombOracle: string,
+    setTaxableBombOracle(
+      _bombOracle: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -739,8 +741,6 @@ export interface TaxOfficeV2 extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    tomb(overrides?: CallOverrides): Promise<BigNumber>;
-
     transferOperator(
       newOperator_: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -758,25 +758,27 @@ export interface TaxOfficeV2 extends BaseContract {
 
     uniRouter(overrides?: CallOverrides): Promise<BigNumber>;
 
-    wftm(overrides?: CallOverrides): Promise<BigNumber>;
+    weth(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
     addLiquidityETHTaxFree(
-      amtTomb: BigNumberish,
-      amtTombMin: BigNumberish,
-      amtFtmMin: BigNumberish,
+      amtBomb: BigNumberish,
+      amtBombMin: BigNumberish,
+      amtEthMin: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
     addLiquidityTaxFree(
       token: string,
-      amtTomb: BigNumberish,
+      amtBomb: BigNumberish,
       amtToken: BigNumberish,
-      amtTombMin: BigNumberish,
+      amtBombMin: BigNumberish,
       amtTokenMin: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    bomb(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     disableAutoCalculateTax(
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -839,8 +841,8 @@ export interface TaxOfficeV2 extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    setTaxableTombOracle(
-      _tombOracle: string,
+    setTaxableBombOracle(
+      _bombOracle: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -860,8 +862,6 @@ export interface TaxOfficeV2 extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    tomb(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     transferOperator(
       newOperator_: string,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -879,6 +879,6 @@ export interface TaxOfficeV2 extends BaseContract {
 
     uniRouter(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    wftm(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    weth(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

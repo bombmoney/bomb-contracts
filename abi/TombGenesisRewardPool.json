@@ -3,12 +3,12 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_tomb",
+        "name": "_bomb",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "_shiba",
+        "name": "_banana",
         "type": "address"
       },
       {
@@ -266,7 +266,7 @@
         "type": "address"
       }
     ],
-    "name": "pendingTOMB",
+    "name": "pendingBOMB",
     "outputs": [
       {
         "internalType": "uint256",
@@ -317,7 +317,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "accTombPerShare",
+        "name": "accBombPerShare",
         "type": "uint256"
       },
       {
@@ -388,7 +388,7 @@
   },
   {
     "inputs": [],
-    "name": "shiba",
+    "name": "banana",
     "outputs": [
       {
         "internalType": "address",
@@ -401,7 +401,7 @@
   },
   {
     "inputs": [],
-    "name": "tomb",
+    "name": "bomb",
     "outputs": [
       {
         "internalType": "contract IERC20",
@@ -414,7 +414,7 @@
   },
   {
     "inputs": [],
-    "name": "tombPerSecond",
+    "name": "bombPerSecond",
     "outputs": [
       {
         "internalType": "uint256",

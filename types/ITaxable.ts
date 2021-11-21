@@ -24,13 +24,13 @@ export interface ITaxableInterface extends utils.Interface {
     "excludeAddress(address)": FunctionFragment;
     "includeAddress(address)": FunctionFragment;
     "isAddressExcluded(address)": FunctionFragment;
+    "setBombOracle(address)": FunctionFragment;
     "setBurnThreshold(uint256)": FunctionFragment;
     "setTaxCollectorAddress(address)": FunctionFragment;
     "setTaxOffice(address)": FunctionFragment;
     "setTaxRate(uint256)": FunctionFragment;
     "setTaxTiersRate(uint8,uint256)": FunctionFragment;
     "setTaxTiersTwap(uint8,uint256)": FunctionFragment;
-    "setTombOracle(address)": FunctionFragment;
     "taxRate()": FunctionFragment;
   };
 
@@ -52,6 +52,10 @@ export interface ITaxableInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "isAddressExcluded",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setBombOracle",
     values: [string]
   ): string;
   encodeFunctionData(
@@ -78,10 +82,6 @@ export interface ITaxableInterface extends utils.Interface {
     functionFragment: "setTaxTiersTwap",
     values: [BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "setTombOracle",
-    values: [string]
-  ): string;
   encodeFunctionData(functionFragment: "taxRate", values?: undefined): string;
 
   decodeFunctionResult(
@@ -105,6 +105,10 @@ export interface ITaxableInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "setBombOracle",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "setBurnThreshold",
     data: BytesLike
   ): Result;
@@ -123,10 +127,6 @@ export interface ITaxableInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "setTaxTiersTwap",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTombOracle",
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "taxRate", data: BytesLike): Result;
@@ -184,6 +184,11 @@ export interface ITaxable extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    setBombOracle(
+      _bombOracle: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     setBurnThreshold(
       _burnThreshold: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -216,11 +221,6 @@ export interface ITaxable extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setTombOracle(
-      _tombOracle: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     taxRate(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -246,6 +246,11 @@ export interface ITaxable extends BaseContract {
 
   isAddressExcluded(
     _address: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setBombOracle(
+    _bombOracle: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -281,11 +286,6 @@ export interface ITaxable extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  setTombOracle(
-    _tombOracle: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   taxRate(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -309,6 +309,11 @@ export interface ITaxable extends BaseContract {
       _address: string,
       overrides?: CallOverrides
     ): Promise<boolean>;
+
+    setBombOracle(
+      _bombOracle: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setBurnThreshold(
       _burnThreshold: BigNumberish,
@@ -339,11 +344,6 @@ export interface ITaxable extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    setTombOracle(
-      _tombOracle: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     taxRate(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
@@ -370,6 +370,11 @@ export interface ITaxable extends BaseContract {
 
     isAddressExcluded(
       _address: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setBombOracle(
+      _bombOracle: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -402,11 +407,6 @@ export interface ITaxable extends BaseContract {
     setTaxTiersTwap(
       _index: BigNumberish,
       _value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    setTombOracle(
-      _tombOracle: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -439,6 +439,11 @@ export interface ITaxable extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
+    setBombOracle(
+      _bombOracle: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
     setBurnThreshold(
       _burnThreshold: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
@@ -468,11 +473,6 @@ export interface ITaxable extends BaseContract {
     setTaxTiersTwap(
       _index: BigNumberish,
       _value: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setTombOracle(
-      _tombOracle: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

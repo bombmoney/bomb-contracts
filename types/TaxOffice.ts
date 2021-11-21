@@ -19,6 +19,7 @@ import { TypedEventFilter, TypedEvent, TypedListener, OnEvent } from "./common";
 
 export interface TaxOfficeInterface extends utils.Interface {
   functions: {
+    "bomb()": FunctionFragment;
     "disableAutoCalculateTax()": FunctionFragment;
     "enableAutoCalculateTax()": FunctionFragment;
     "excludeAddressFromTax(address)": FunctionFragment;
@@ -32,13 +33,13 @@ export interface TaxOfficeInterface extends utils.Interface {
     "setTaxRate(uint256)": FunctionFragment;
     "setTaxTiersRate(uint8,uint256)": FunctionFragment;
     "setTaxTiersTwap(uint8,uint256)": FunctionFragment;
-    "setTaxableTombOracle(address)": FunctionFragment;
-    "tomb()": FunctionFragment;
+    "setTaxableBombOracle(address)": FunctionFragment;
     "transferOperator(address)": FunctionFragment;
     "transferOwnership(address)": FunctionFragment;
     "transferTaxOffice(address)": FunctionFragment;
   };
 
+  encodeFunctionData(functionFragment: "bomb", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "disableAutoCalculateTax",
     values?: undefined
@@ -86,10 +87,9 @@ export interface TaxOfficeInterface extends utils.Interface {
     values: [BigNumberish, BigNumberish]
   ): string;
   encodeFunctionData(
-    functionFragment: "setTaxableTombOracle",
+    functionFragment: "setTaxableBombOracle",
     values: [string]
   ): string;
-  encodeFunctionData(functionFragment: "tomb", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "transferOperator",
     values: [string]
@@ -103,6 +103,7 @@ export interface TaxOfficeInterface extends utils.Interface {
     values: [string]
   ): string;
 
+  decodeFunctionResult(functionFragment: "bomb", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "disableAutoCalculateTax",
     data: BytesLike
@@ -144,10 +145,9 @@ export interface TaxOfficeInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "setTaxableTombOracle",
+    functionFragment: "setTaxableBombOracle",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "tomb", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "transferOperator",
     data: BytesLike
@@ -213,6 +213,8 @@ export interface TaxOffice extends BaseContract {
   removeListener: OnEvent<this>;
 
   functions: {
+    bomb(overrides?: CallOverrides): Promise<[string]>;
+
     disableAutoCalculateTax(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -268,12 +270,10 @@ export interface TaxOffice extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setTaxableTombOracle(
-      _tombOracle: string,
+    setTaxableBombOracle(
+      _bombOracle: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
-
-    tomb(overrides?: CallOverrides): Promise<[string]>;
 
     transferOperator(
       newOperator_: string,
@@ -290,6 +290,8 @@ export interface TaxOffice extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
   };
+
+  bomb(overrides?: CallOverrides): Promise<string>;
 
   disableAutoCalculateTax(
     overrides?: Overrides & { from?: string | Promise<string> }
@@ -346,12 +348,10 @@ export interface TaxOffice extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  setTaxableTombOracle(
-    _tombOracle: string,
+  setTaxableBombOracle(
+    _bombOracle: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
-
-  tomb(overrides?: CallOverrides): Promise<string>;
 
   transferOperator(
     newOperator_: string,
@@ -369,6 +369,8 @@ export interface TaxOffice extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
+    bomb(overrides?: CallOverrides): Promise<string>;
+
     disableAutoCalculateTax(overrides?: CallOverrides): Promise<void>;
 
     enableAutoCalculateTax(overrides?: CallOverrides): Promise<void>;
@@ -418,12 +420,10 @@ export interface TaxOffice extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    setTaxableTombOracle(
-      _tombOracle: string,
+    setTaxableBombOracle(
+      _bombOracle: string,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    tomb(overrides?: CallOverrides): Promise<string>;
 
     transferOperator(
       newOperator_: string,
@@ -462,6 +462,8 @@ export interface TaxOffice extends BaseContract {
   };
 
   estimateGas: {
+    bomb(overrides?: CallOverrides): Promise<BigNumber>;
+
     disableAutoCalculateTax(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -517,12 +519,10 @@ export interface TaxOffice extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    setTaxableTombOracle(
-      _tombOracle: string,
+    setTaxableBombOracle(
+      _bombOracle: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
-
-    tomb(overrides?: CallOverrides): Promise<BigNumber>;
 
     transferOperator(
       newOperator_: string,
@@ -541,6 +541,8 @@ export interface TaxOffice extends BaseContract {
   };
 
   populateTransaction: {
+    bomb(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     disableAutoCalculateTax(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -596,12 +598,10 @@ export interface TaxOffice extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    setTaxableTombOracle(
-      _tombOracle: string,
+    setTaxableBombOracle(
+      _bombOracle: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
-
-    tomb(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     transferOperator(
       newOperator_: string,

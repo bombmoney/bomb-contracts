@@ -127,10 +127,23 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "bomb",
+    "outputs": [
+      {
+        "internalType": "contract IERC20",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "address",
-        "name": "mason",
+        "name": "member",
         "type": "address"
       }
     ],
@@ -149,7 +162,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "mason",
+        "name": "member",
         "type": "address"
       }
     ],
@@ -175,7 +188,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "mason",
+        "name": "member",
         "type": "address"
       }
     ],
@@ -211,14 +224,8 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "mason",
-        "type": "address"
-      }
-    ],
-    "name": "getLastSnapshotIndexOf",
+    "inputs": [],
+    "name": "getBombPrice",
     "outputs": [
       {
         "internalType": "uint256",
@@ -230,8 +237,14 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getTombPrice",
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "member",
+        "type": "address"
+      }
+    ],
+    "name": "getLastSnapshotIndexOf",
     "outputs": [
       {
         "internalType": "uint256",
@@ -269,7 +282,7 @@
     "inputs": [
       {
         "internalType": "contract IERC20",
-        "name": "_tomb",
+        "name": "_bomb",
         "type": "address"
       },
       {
@@ -322,7 +335,7 @@
         "type": "uint256"
       }
     ],
-    "name": "masonryHistory",
+    "name": "boardroomHistory",
     "outputs": [
       {
         "internalType": "uint256",
@@ -351,7 +364,7 @@
         "type": "address"
       }
     ],
-    "name": "masons",
+    "name": "members",
     "outputs": [
       {
         "internalType": "uint256",
@@ -479,19 +492,6 @@
     "name": "stake",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "tomb",
-    "outputs": [
-      {
-        "internalType": "contract IERC20",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {

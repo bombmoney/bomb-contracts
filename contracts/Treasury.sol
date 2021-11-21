@@ -12,16 +12,21 @@ import "./owner/Operator.sol";
 import "./utils/ContractGuard.sol";
 import "./interfaces/IBasisAsset.sol";
 import "./interfaces/IOracle.sol";
-import "./interfaces/IMasonry.sol";
+import "./interfaces/IBoardroom.sol";
 
 /*
-  ______                __       _______
- /_  __/___  ____ ___  / /_     / ____(_)___  ____ _____  ________
-  / / / __ \/ __ `__ \/ __ \   / /_  / / __ \/ __ `/ __ \/ ___/ _ \
- / / / /_/ / / / / / / /_/ /  / __/ / / / / / /_/ / / / / /__/  __/
-/_/  \____/_/ /_/ /_/_.___/  /_/   /_/_/ /_/\__,_/_/ /_/\___/\___/
 
-    http://tomb.finance
+$$$$$$$\   $$$$$$\  $$\      $$\ $$$$$$$\                                                            
+$$  __$$\ $$  __$$\ $$$\    $$$ |$$  __$$\                                                           
+$$ |  $$ |$$ /  $$ |$$$$\  $$$$ |$$ |  $$ |    $$$$$$\$$$$\   $$$$$$\  $$$$$$$\   $$$$$$\  $$\   $$\ 
+$$$$$$$\ |$$ |  $$ |$$\$$\$$ $$ |$$$$$$$\ |    $$  _$$  _$$\ $$  __$$\ $$  __$$\ $$  __$$\ $$ |  $$ |
+$$  __$$\ $$ |  $$ |$$ \$$$  $$ |$$  __$$\     $$ / $$ / $$ |$$ /  $$ |$$ |  $$ |$$$$$$$$ |$$ |  $$ |
+$$ |  $$ |$$ |  $$ |$$ |\$  /$$ |$$ |  $$ |    $$ | $$ | $$ |$$ |  $$ |$$ |  $$ |$$   ____|$$ |  $$ |
+$$$$$$$  | $$$$$$  |$$ | \_/ $$ |$$$$$$$  |$$\ $$ | $$ | $$ |\$$$$$$  |$$ |  $$ |\$$$$$$$\ \$$$$$$$ |
+\_______/  \______/ \__|     \__|\_______/ \__|\__| \__| \__| \______/ \__|  \__| \_______| \____$$ |
+                                                                                           $$\   $$ |
+                                                                                           \$$$$$$  |
+    http://bomb.money                                                                      \______/ 
 */
 contract Treasury is ContractGuard {
     using SafeERC20 for IERC20;
@@ -47,22 +52,21 @@ contract Treasury is ContractGuard {
 
     // exclusions from total supply
     address[] public excludedFromTotalSupply = [
-        address(0x2b0338cd8483Fd139951173FF7e560Da0Fc281d1), // TombGenesisPool
-        address(0xE7310adf7A43B7B4cc673e1DD0Faa468946Cc898), // new TombRewardPool
-        address(0xA7B16703470055881e7EE093e9b0bF537f29CD4d) // old TombRewardPool
+        address(0xB7e1E341b2CBCc7d1EdF4DC6E5e962aE5C621ca5), // BombGenesisPool
+        address(0x04b79c851ed1A36549C6151189c79EC0eaBca745) // new BombRewardPool
     ];
 
     // core components
-    address public tomb;
-    address public tbond;
-    address public tshare;
+    address public bomb;
+    address public bbond;
+    address public bshare;
 
-    address public masonry;
-    address public tombOracle;
+    address public boardroom;
+    address public bombOracle;
 
     // price
-    uint256 public tombPriceOne;
-    uint256 public tombPriceCeiling;
+    uint256 public bombPriceOne;
+    uint256 public bombPriceCeiling;
 
     uint256 public seigniorageSaved;
 
@@ -75,18 +79,18 @@ contract Treasury is ContractGuard {
     uint256 public maxSupplyContractionPercent;
     uint256 public maxDebtRatioPercent;
 
-    // 28 first epochs (1 week) with 4.5% expansion regardless of TOMB price
+    // 28 first epochs (1 week) with 4.5% expansion regardless of BOMB price
     uint256 public bootstrapEpochs;
     uint256 public bootstrapSupplyExpansionPercent;
 
     /* =================== Added variables =================== */
-    uint256 public previousEpochTombPrice;
+    uint256 public previousEpochBombPrice;
     uint256 public maxDiscountRate; // when purchasing bond
     uint256 public maxPremiumRate; // when redeeming bond
     uint256 public discountPercent;
     uint256 public premiumThreshold;
     uint256 public premiumPercent;
-    uint256 public mintingFactorForPayingDebt; // print extra TOMB during debt phase
+    uint256 public mintingFactorForPayingDebt; // print extra BOMB during debt phase
 
     address public daoFund;
     uint256 public daoFundSharedPercent;
@@ -98,10 +102,10 @@ contract Treasury is ContractGuard {
 
     event Initialized(address indexed executor, uint256 at);
     event BurnedBonds(address indexed from, uint256 bondAmount);
-    event RedeemedBonds(address indexed from, uint256 tombAmount, uint256 bondAmount);
-    event BoughtBonds(address indexed from, uint256 tombAmount, uint256 bondAmount);
+    event RedeemedBonds(address indexed from, uint256 bombAmount, uint256 bondAmount);
+    event BoughtBonds(address indexed from, uint256 bombAmount, uint256 bondAmount);
     event TreasuryFunded(uint256 timestamp, uint256 seigniorage);
-    event MasonryFunded(uint256 timestamp, uint256 seigniorage);
+    event BoardroomFunded(uint256 timestamp, uint256 seigniorage);
     event DaoFundFunded(uint256 timestamp, uint256 seigniorage);
     event DevFundFunded(uint256 timestamp, uint256 seigniorage);
 
@@ -124,15 +128,15 @@ contract Treasury is ContractGuard {
         _;
 
         epoch = epoch.add(1);
-        epochSupplyContractionLeft = (getTombPrice() > tombPriceCeiling) ? 0 : getTombCirculatingSupply().mul(maxSupplyContractionPercent).div(10000);
+        epochSupplyContractionLeft = (getBombPrice() > bombPriceCeiling) ? 0 : getBombCirculatingSupply().mul(maxSupplyContractionPercent).div(10000);
     }
 
     modifier checkOperator() {
         require(
-            IBasisAsset(tomb).operator() == address(this) &&
-                IBasisAsset(tbond).operator() == address(this) &&
-                IBasisAsset(tshare).operator() == address(this) &&
-                Operator(masonry).operator() == address(this),
+            IBasisAsset(bomb).operator() == address(this) &&
+                IBasisAsset(bbond).operator() == address(this) &&
+                IBasisAsset(bshare).operator() == address(this) &&
+                Operator(boardroom).operator() == address(this),
             "Treasury: need more permission"
         );
 
@@ -157,19 +161,19 @@ contract Treasury is ContractGuard {
     }
 
     // oracle
-    function getTombPrice() public view returns (uint256 tombPrice) {
-        try IOracle(tombOracle).consult(tomb, 1e18) returns (uint144 price) {
+    function getBombPrice() public view returns (uint256 bombPrice) {
+        try IOracle(bombOracle).consult(bomb, 1e18) returns (uint144 price) {
             return uint256(price);
         } catch {
-            revert("Treasury: failed to consult TOMB price from the oracle");
+            revert("Treasury: failed to consult BOMB price from the oracle");
         }
     }
 
-    function getTombUpdatedPrice() public view returns (uint256 _tombPrice) {
-        try IOracle(tombOracle).twap(tomb, 1e18) returns (uint144 price) {
+    function getBombUpdatedPrice() public view returns (uint256 _bombPrice) {
+        try IOracle(bombOracle).twap(bomb, 1e18) returns (uint144 price) {
             return uint256(price);
         } catch {
-            revert("Treasury: failed to consult TOMB price from the oracle");
+            revert("Treasury: failed to consult BOMB price from the oracle");
         }
     }
 
@@ -178,41 +182,41 @@ contract Treasury is ContractGuard {
         return seigniorageSaved;
     }
 
-    function getBurnableTombLeft() public view returns (uint256 _burnableTombLeft) {
-        uint256 _tombPrice = getTombPrice();
-        if (_tombPrice <= tombPriceOne) {
-            uint256 _tombSupply = getTombCirculatingSupply();
-            uint256 _bondMaxSupply = _tombSupply.mul(maxDebtRatioPercent).div(10000);
-            uint256 _bondSupply = IERC20(tbond).totalSupply();
+    function getBurnableBombLeft() public view returns (uint256 _burnableBombLeft) {
+        uint256 _bombPrice = getBombPrice();
+        if (_bombPrice <= bombPriceOne) {
+            uint256 _bombSupply = getBombCirculatingSupply();
+            uint256 _bondMaxSupply = _bombSupply.mul(maxDebtRatioPercent).div(10000);
+            uint256 _bondSupply = IERC20(bbond).totalSupply();
             if (_bondMaxSupply > _bondSupply) {
                 uint256 _maxMintableBond = _bondMaxSupply.sub(_bondSupply);
-                uint256 _maxBurnableTomb = _maxMintableBond.mul(_tombPrice).div(1e18);
-                _burnableTombLeft = Math.min(epochSupplyContractionLeft, _maxBurnableTomb);
+                uint256 _maxBurnableBomb = _maxMintableBond.mul(_bombPrice).div(1e18);
+                _burnableBombLeft = Math.min(epochSupplyContractionLeft, _maxBurnableBomb);
             }
         }
     }
 
     function getRedeemableBonds() public view returns (uint256 _redeemableBonds) {
-        uint256 _tombPrice = getTombPrice();
-        if (_tombPrice > tombPriceCeiling) {
-            uint256 _totalTomb = IERC20(tomb).balanceOf(address(this));
+        uint256 _bombPrice = getBombPrice();
+        if (_bombPrice > bombPriceCeiling) {
+            uint256 _totalBomb = IERC20(bomb).balanceOf(address(this));
             uint256 _rate = getBondPremiumRate();
             if (_rate > 0) {
-                _redeemableBonds = _totalTomb.mul(1e18).div(_rate);
+                _redeemableBonds = _totalBomb.mul(1e18).div(_rate);
             }
         }
     }
 
     function getBondDiscountRate() public view returns (uint256 _rate) {
-        uint256 _tombPrice = getTombPrice();
-        if (_tombPrice <= tombPriceOne) {
+        uint256 _bombPrice = getBombPrice();
+        if (_bombPrice <= bombPriceOne) {
             if (discountPercent == 0) {
                 // no discount
-                _rate = tombPriceOne;
+                _rate = bombPriceOne;
             } else {
-                uint256 _bondAmount = tombPriceOne.mul(1e18).div(_tombPrice); // to burn 1 TOMB
-                uint256 _discountAmount = _bondAmount.sub(tombPriceOne).mul(discountPercent).div(10000);
-                _rate = tombPriceOne.add(_discountAmount);
+                uint256 _bondAmount = bombPriceOne.mul(1e18).div(_bombPrice); // to burn 1 BOMB
+                uint256 _discountAmount = _bondAmount.sub(bombPriceOne).mul(discountPercent).div(10000);
+                _rate = bombPriceOne.add(_discountAmount);
                 if (maxDiscountRate > 0 && _rate > maxDiscountRate) {
                     _rate = maxDiscountRate;
                 }
@@ -221,19 +225,19 @@ contract Treasury is ContractGuard {
     }
 
     function getBondPremiumRate() public view returns (uint256 _rate) {
-        uint256 _tombPrice = getTombPrice();
-        if (_tombPrice > tombPriceCeiling) {
-            uint256 _tombPricePremiumThreshold = tombPriceOne.mul(premiumThreshold).div(100);
-            if (_tombPrice >= _tombPricePremiumThreshold) {
+        uint256 _bombPrice = getBombPrice();
+        if (_bombPrice > bombPriceCeiling) {
+            uint256 _bombPricePremiumThreshold = bombPriceOne.mul(premiumThreshold).div(100);
+            if (_bombPrice >= _bombPricePremiumThreshold) {
                 //Price > 1.10
-                uint256 _premiumAmount = _tombPrice.sub(tombPriceOne).mul(premiumPercent).div(10000);
-                _rate = tombPriceOne.add(_premiumAmount);
+                uint256 _premiumAmount = _bombPrice.sub(bombPriceOne).mul(premiumPercent).div(10000);
+                _rate = bombPriceOne.add(_premiumAmount);
                 if (maxPremiumRate > 0 && _rate > maxPremiumRate) {
                     _rate = maxPremiumRate;
                 }
             } else {
                 // no premium bonus
-                _rate = tombPriceOne;
+                _rate = bombPriceOne;
             }
         }
     }
@@ -241,22 +245,22 @@ contract Treasury is ContractGuard {
     /* ========== GOVERNANCE ========== */
 
     function initialize(
-        address _tomb,
-        address _tbond,
-        address _tshare,
-        address _tombOracle,
-        address _masonry,
+        address _bomb,
+        address _bbond,
+        address _bshare,
+        address _bombOracle,
+        address _boardroom,
         uint256 _startTime
     ) public notInitialized {
-        tomb = _tomb;
-        tbond = _tbond;
-        tshare = _tshare;
-        tombOracle = _tombOracle;
-        masonry = _masonry;
+        bomb = _bomb;
+        bbond = _bbond;
+        bshare = _bshare;
+        bombOracle = _bombOracle;
+        boardroom = _boardroom;
         startTime = _startTime;
 
-        tombPriceOne = 10**18;
-        tombPriceCeiling = tombPriceOne.mul(101).div(100);
+        bombPriceOne = 10**14; // This is to allow a PEG of 10,000 BOMB per BTC
+        bombPriceCeiling = bombPriceOne.mul(101).div(100);
 
         // Dynamic max expansion percent
         supplyTiers = [0 ether, 500000 ether, 1000000 ether, 1500000 ether, 2000000 ether, 5000000 ether, 10000000 ether, 20000000 ether, 50000000 ether];
@@ -265,8 +269,8 @@ contract Treasury is ContractGuard {
         maxSupplyExpansionPercent = 400; // Upto 4.0% supply for expansion
 
         bondDepletionFloorPercent = 10000; // 100% of Bond supply for depletion floor
-        seigniorageExpansionFloorPercent = 3500; // At least 35% of expansion reserved for masonry
-        maxSupplyContractionPercent = 300; // Upto 3.0% supply for contraction (to burn TOMB and mint tBOND)
+        seigniorageExpansionFloorPercent = 3500; // At least 35% of expansion reserved for boardroom
+        maxSupplyContractionPercent = 300; // Upto 3.0% supply for contraction (to burn BOMB and mint tBOND)
         maxDebtRatioPercent = 3500; // Upto 35% supply of tBOND to purchase
 
         premiumThreshold = 110;
@@ -277,7 +281,7 @@ contract Treasury is ContractGuard {
         bootstrapSupplyExpansionPercent = 450;
 
         // set seigniorageSaved to it's balance
-        seigniorageSaved = IERC20(tomb).balanceOf(address(this));
+        seigniorageSaved = IERC20(bomb).balanceOf(address(this));
 
         initialized = true;
         operator = msg.sender;
@@ -288,17 +292,17 @@ contract Treasury is ContractGuard {
         operator = _operator;
     }
 
-    function setMasonry(address _masonry) external onlyOperator {
-        masonry = _masonry;
+    function setBoardroom(address _boardroom) external onlyOperator {
+        boardroom = _boardroom;
     }
 
-    function setTombOracle(address _tombOracle) external onlyOperator {
-        tombOracle = _tombOracle;
+    function setBombOracle(address _bombOracle) external onlyOperator {
+        bombOracle = _bombOracle;
     }
 
-    function setTombPriceCeiling(uint256 _tombPriceCeiling) external onlyOperator {
-        require(_tombPriceCeiling >= tombPriceOne && _tombPriceCeiling <= tombPriceOne.mul(120).div(100), "out of range"); // [$1.0, $1.2]
-        tombPriceCeiling = _tombPriceCeiling;
+    function setBombPriceCeiling(uint256 _bombPriceCeiling) external onlyOperator {
+        require(_bombPriceCeiling >= bombPriceOne && _bombPriceCeiling <= bombPriceOne.mul(120).div(100), "out of range"); // [$1.0, $1.2]
+        bombPriceCeiling = _bombPriceCeiling;
     }
 
     function setMaxSupplyExpansionPercents(uint256 _maxSupplyExpansionPercent) external onlyOperator {
@@ -379,7 +383,7 @@ contract Treasury is ContractGuard {
     }
 
     function setPremiumThreshold(uint256 _premiumThreshold) external onlyOperator {
-        require(_premiumThreshold >= tombPriceCeiling, "_premiumThreshold exceeds tombPriceCeiling");
+        require(_premiumThreshold >= bombPriceCeiling, "_premiumThreshold exceeds bombPriceCeiling");
         require(_premiumThreshold <= 150, "_premiumThreshold is higher than 1.5");
         premiumThreshold = _premiumThreshold;
     }
@@ -396,103 +400,103 @@ contract Treasury is ContractGuard {
 
     /* ========== MUTABLE FUNCTIONS ========== */
 
-    function _updateTombPrice() internal {
-        try IOracle(tombOracle).update() {} catch {}
+    function _updateBombPrice() internal {
+        try IOracle(bombOracle).update() {} catch {}
     }
 
-    function getTombCirculatingSupply() public view returns (uint256) {
-        IERC20 tombErc20 = IERC20(tomb);
-        uint256 totalSupply = tombErc20.totalSupply();
+    function getBombCirculatingSupply() public view returns (uint256) {
+        IERC20 bombErc20 = IERC20(bomb);
+        uint256 totalSupply = bombErc20.totalSupply();
         uint256 balanceExcluded = 0;
         for (uint8 entryId = 0; entryId < excludedFromTotalSupply.length; ++entryId) {
-            balanceExcluded = balanceExcluded.add(tombErc20.balanceOf(excludedFromTotalSupply[entryId]));
+            balanceExcluded = balanceExcluded.add(bombErc20.balanceOf(excludedFromTotalSupply[entryId]));
         }
         return totalSupply.sub(balanceExcluded);
     }
 
-    function buyBonds(uint256 _tombAmount, uint256 targetPrice) external onlyOneBlock checkCondition checkOperator {
-        require(_tombAmount > 0, "Treasury: cannot purchase bonds with zero amount");
+    function buyBonds(uint256 _bombAmount, uint256 targetPrice) external onlyOneBlock checkCondition checkOperator {
+        require(_bombAmount > 0, "Treasury: cannot purchase bonds with zero amount");
 
-        uint256 tombPrice = getTombPrice();
-        require(tombPrice == targetPrice, "Treasury: TOMB price moved");
+        uint256 bombPrice = getBombPrice();
+        require(bombPrice == targetPrice, "Treasury: BOMB price moved");
         require(
-            tombPrice < tombPriceOne, // price < $1
-            "Treasury: tombPrice not eligible for bond purchase"
+            bombPrice < bombPriceOne, // price < $1
+            "Treasury: bombPrice not eligible for bond purchase"
         );
 
-        require(_tombAmount <= epochSupplyContractionLeft, "Treasury: not enough bond left to purchase");
+        require(_bombAmount <= epochSupplyContractionLeft, "Treasury: not enough bond left to purchase");
 
         uint256 _rate = getBondDiscountRate();
         require(_rate > 0, "Treasury: invalid bond rate");
 
-        uint256 _bondAmount = _tombAmount.mul(_rate).div(1e18);
-        uint256 tombSupply = getTombCirculatingSupply();
-        uint256 newBondSupply = IERC20(tbond).totalSupply().add(_bondAmount);
-        require(newBondSupply <= tombSupply.mul(maxDebtRatioPercent).div(10000), "over max debt ratio");
+        uint256 _bondAmount = _bombAmount.mul(_rate).div(1e18);
+        uint256 bombSupply = getBombCirculatingSupply();
+        uint256 newBondSupply = IERC20(bbond).totalSupply().add(_bondAmount);
+        require(newBondSupply <= bombSupply.mul(maxDebtRatioPercent).div(10000), "over max debt ratio");
 
-        IBasisAsset(tomb).burnFrom(msg.sender, _tombAmount);
-        IBasisAsset(tbond).mint(msg.sender, _bondAmount);
+        IBasisAsset(bomb).burnFrom(msg.sender, _bombAmount);
+        IBasisAsset(bbond).mint(msg.sender, _bondAmount);
 
-        epochSupplyContractionLeft = epochSupplyContractionLeft.sub(_tombAmount);
-        _updateTombPrice();
+        epochSupplyContractionLeft = epochSupplyContractionLeft.sub(_bombAmount);
+        _updateBombPrice();
 
-        emit BoughtBonds(msg.sender, _tombAmount, _bondAmount);
+        emit BoughtBonds(msg.sender, _bombAmount, _bondAmount);
     }
 
     function redeemBonds(uint256 _bondAmount, uint256 targetPrice) external onlyOneBlock checkCondition checkOperator {
         require(_bondAmount > 0, "Treasury: cannot redeem bonds with zero amount");
 
-        uint256 tombPrice = getTombPrice();
-        require(tombPrice == targetPrice, "Treasury: TOMB price moved");
+        uint256 bombPrice = getBombPrice();
+        require(bombPrice == targetPrice, "Treasury: BOMB price moved");
         require(
-            tombPrice > tombPriceCeiling, // price > $1.01
-            "Treasury: tombPrice not eligible for bond purchase"
+            bombPrice > bombPriceCeiling, // price > $1.01
+            "Treasury: bombPrice not eligible for bond purchase"
         );
 
         uint256 _rate = getBondPremiumRate();
         require(_rate > 0, "Treasury: invalid bond rate");
 
-        uint256 _tombAmount = _bondAmount.mul(_rate).div(1e18);
-        require(IERC20(tomb).balanceOf(address(this)) >= _tombAmount, "Treasury: treasury has no more budget");
+        uint256 _bombAmount = _bondAmount.mul(_rate).div(1e18);
+        require(IERC20(bomb).balanceOf(address(this)) >= _bombAmount, "Treasury: treasury has no more budget");
 
-        seigniorageSaved = seigniorageSaved.sub(Math.min(seigniorageSaved, _tombAmount));
+        seigniorageSaved = seigniorageSaved.sub(Math.min(seigniorageSaved, _bombAmount));
 
-        IBasisAsset(tbond).burnFrom(msg.sender, _bondAmount);
-        IERC20(tomb).safeTransfer(msg.sender, _tombAmount);
+        IBasisAsset(bbond).burnFrom(msg.sender, _bondAmount);
+        IERC20(bomb).safeTransfer(msg.sender, _bombAmount);
 
-        _updateTombPrice();
+        _updateBombPrice();
 
-        emit RedeemedBonds(msg.sender, _tombAmount, _bondAmount);
+        emit RedeemedBonds(msg.sender, _bombAmount, _bondAmount);
     }
 
-    function _sendToMasonry(uint256 _amount) internal {
-        IBasisAsset(tomb).mint(address(this), _amount);
+    function _sendToBoardroom(uint256 _amount) internal {
+        IBasisAsset(bomb).mint(address(this), _amount);
 
         uint256 _daoFundSharedAmount = 0;
         if (daoFundSharedPercent > 0) {
             _daoFundSharedAmount = _amount.mul(daoFundSharedPercent).div(10000);
-            IERC20(tomb).transfer(daoFund, _daoFundSharedAmount);
+            IERC20(bomb).transfer(daoFund, _daoFundSharedAmount);
             emit DaoFundFunded(now, _daoFundSharedAmount);
         }
 
         uint256 _devFundSharedAmount = 0;
         if (devFundSharedPercent > 0) {
             _devFundSharedAmount = _amount.mul(devFundSharedPercent).div(10000);
-            IERC20(tomb).transfer(devFund, _devFundSharedAmount);
+            IERC20(bomb).transfer(devFund, _devFundSharedAmount);
             emit DevFundFunded(now, _devFundSharedAmount);
         }
 
         _amount = _amount.sub(_daoFundSharedAmount).sub(_devFundSharedAmount);
 
-        IERC20(tomb).safeApprove(masonry, 0);
-        IERC20(tomb).safeApprove(masonry, _amount);
-        IMasonry(masonry).allocateSeigniorage(_amount);
-        emit MasonryFunded(now, _amount);
+        IERC20(bomb).safeApprove(boardroom, 0);
+        IERC20(bomb).safeApprove(boardroom, _amount);
+        IBoardroom(boardroom).allocateSeigniorage(_amount);
+        emit BoardroomFunded(now, _amount);
     }
 
-    function _calculateMaxSupplyExpansionPercent(uint256 _tombSupply) internal returns (uint256) {
+    function _calculateMaxSupplyExpansionPercent(uint256 _bombSupply) internal returns (uint256) {
         for (uint8 tierId = 8; tierId >= 0; --tierId) {
-            if (_tombSupply >= supplyTiers[tierId]) {
+            if (_bombSupply >= supplyTiers[tierId]) {
                 maxSupplyExpansionPercent = maxExpansionTiers[tierId];
                 break;
             }
@@ -501,41 +505,41 @@ contract Treasury is ContractGuard {
     }
 
     function allocateSeigniorage() external onlyOneBlock checkCondition checkEpoch checkOperator {
-        _updateTombPrice();
-        previousEpochTombPrice = getTombPrice();
-        uint256 tombSupply = getTombCirculatingSupply().sub(seigniorageSaved);
+        _updateBombPrice();
+        previousEpochBombPrice = getBombPrice();
+        uint256 bombSupply = getBombCirculatingSupply().sub(seigniorageSaved);
         if (epoch < bootstrapEpochs) {
             // 28 first epochs with 4.5% expansion
-            _sendToMasonry(tombSupply.mul(bootstrapSupplyExpansionPercent).div(10000));
+            _sendToBoardroom(bombSupply.mul(bootstrapSupplyExpansionPercent).div(10000));
         } else {
-            if (previousEpochTombPrice > tombPriceCeiling) {
-                // Expansion ($TOMB Price > 1 $FTM): there is some seigniorage to be allocated
-                uint256 bondSupply = IERC20(tbond).totalSupply();
-                uint256 _percentage = previousEpochTombPrice.sub(tombPriceOne);
+            if (previousEpochBombPrice > bombPriceCeiling) {
+                // Expansion ($BOMB Price > 1 $ETH): there is some seigniorage to be allocated
+                uint256 bondSupply = IERC20(bbond).totalSupply();
+                uint256 _percentage = previousEpochBombPrice.sub(bombPriceOne);
                 uint256 _savedForBond;
-                uint256 _savedForMasonry;
-                uint256 _mse = _calculateMaxSupplyExpansionPercent(tombSupply).mul(1e14);
+                uint256 _savedForBoardroom;
+                uint256 _mse = _calculateMaxSupplyExpansionPercent(bombSupply).mul(1e14);
                 if (_percentage > _mse) {
                     _percentage = _mse;
                 }
                 if (seigniorageSaved >= bondSupply.mul(bondDepletionFloorPercent).div(10000)) {
                     // saved enough to pay debt, mint as usual rate
-                    _savedForMasonry = tombSupply.mul(_percentage).div(1e18);
+                    _savedForBoardroom = bombSupply.mul(_percentage).div(1e18);
                 } else {
                     // have not saved enough to pay debt, mint more
-                    uint256 _seigniorage = tombSupply.mul(_percentage).div(1e18);
-                    _savedForMasonry = _seigniorage.mul(seigniorageExpansionFloorPercent).div(10000);
-                    _savedForBond = _seigniorage.sub(_savedForMasonry);
+                    uint256 _seigniorage = bombSupply.mul(_percentage).div(1e18);
+                    _savedForBoardroom = _seigniorage.mul(seigniorageExpansionFloorPercent).div(10000);
+                    _savedForBond = _seigniorage.sub(_savedForBoardroom);
                     if (mintingFactorForPayingDebt > 0) {
                         _savedForBond = _savedForBond.mul(mintingFactorForPayingDebt).div(10000);
                     }
                 }
-                if (_savedForMasonry > 0) {
-                    _sendToMasonry(_savedForMasonry);
+                if (_savedForBoardroom > 0) {
+                    _sendToBoardroom(_savedForBoardroom);
                 }
                 if (_savedForBond > 0) {
                     seigniorageSaved = seigniorageSaved.add(_savedForBond);
-                    IBasisAsset(tomb).mint(address(this), _savedForBond);
+                    IBasisAsset(bomb).mint(address(this), _savedForBond);
                     emit TreasuryFunded(now, _savedForBond);
                 }
             }
@@ -548,29 +552,29 @@ contract Treasury is ContractGuard {
         address _to
     ) external onlyOperator {
         // do not allow to drain core tokens
-        require(address(_token) != address(tomb), "tomb");
-        require(address(_token) != address(tbond), "bond");
-        require(address(_token) != address(tshare), "share");
+        require(address(_token) != address(bomb), "bomb");
+        require(address(_token) != address(bbond), "bond");
+        require(address(_token) != address(bshare), "share");
         _token.safeTransfer(_to, _amount);
     }
 
-    function masonrySetOperator(address _operator) external onlyOperator {
-        IMasonry(masonry).setOperator(_operator);
+    function boardroomSetOperator(address _operator) external onlyOperator {
+        IBoardroom(boardroom).setOperator(_operator);
     }
 
-    function masonrySetLockUp(uint256 _withdrawLockupEpochs, uint256 _rewardLockupEpochs) external onlyOperator {
-        IMasonry(masonry).setLockUp(_withdrawLockupEpochs, _rewardLockupEpochs);
+    function boardroomSetLockUp(uint256 _withdrawLockupEpochs, uint256 _rewardLockupEpochs) external onlyOperator {
+        IBoardroom(boardroom).setLockUp(_withdrawLockupEpochs, _rewardLockupEpochs);
     }
 
-    function masonryAllocateSeigniorage(uint256 amount) external onlyOperator {
-        IMasonry(masonry).allocateSeigniorage(amount);
+    function boardroomAllocateSeigniorage(uint256 amount) external onlyOperator {
+        IBoardroom(boardroom).allocateSeigniorage(amount);
     }
 
-    function masonryGovernanceRecoverUnsupported(
+    function boardroomGovernanceRecoverUnsupported(
         address _token,
         uint256 _amount,
         address _to
     ) external onlyOperator {
-        IMasonry(masonry).governanceRecoverUnsupported(_token, _amount, _to);
+        IBoardroom(boardroom).governanceRecoverUnsupported(_token, _amount, _to);
     }
 }

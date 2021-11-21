@@ -40,7 +40,7 @@ const _abi = [
   },
   {
     inputs: [],
-    name: "getTombPrice",
+    name: "getBombPrice",
     outputs: [
       {
         internalType: "uint256",

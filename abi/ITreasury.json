@@ -32,7 +32,7 @@
   },
   {
     "inputs": [],
-    "name": "getTombPrice",
+    "name": "getBombPrice",
     "outputs": [
       {
         "internalType": "uint256",

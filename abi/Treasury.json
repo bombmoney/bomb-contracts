@@ -3,6 +3,25 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "timestamp",
+        "type": "uint256"
+      },
+      {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "seigniorage",
+        "type": "uint256"
+      }
+    ],
+    "name": "BoardroomFunded",
+    "type": "event"
+  },
+  {
+    "anonymous": false,
+    "inputs": [
+      {
         "indexed": true,
         "internalType": "address",
         "name": "from",
@@ -11,7 +30,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "tombAmount",
+        "name": "bombAmount",
         "type": "uint256"
       },
       {
@@ -104,25 +123,6 @@
     "anonymous": false,
     "inputs": [
       {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "timestamp",
-        "type": "uint256"
-      },
-      {
-        "indexed": false,
-        "internalType": "uint256",
-        "name": "seigniorage",
-        "type": "uint256"
-      }
-    ],
-    "name": "MasonryFunded",
-    "type": "event"
-  },
-  {
-    "anonymous": false,
-    "inputs": [
-      {
         "indexed": true,
         "internalType": "address",
         "name": "from",
@@ -131,7 +131,7 @@
       {
         "indexed": false,
         "internalType": "uint256",
-        "name": "tombAmount",
+        "name": "bombAmount",
         "type": "uint256"
       },
       {
@@ -185,6 +185,151 @@
   },
   {
     "inputs": [],
+    "name": "bbond",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "boardroom",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "amount",
+        "type": "uint256"
+      }
+    ],
+    "name": "boardroomAllocateSeigniorage",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_token",
+        "type": "address"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_amount",
+        "type": "uint256"
+      },
+      {
+        "internalType": "address",
+        "name": "_to",
+        "type": "address"
+      }
+    ],
+    "name": "boardroomGovernanceRecoverUnsupported",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_withdrawLockupEpochs",
+        "type": "uint256"
+      },
+      {
+        "internalType": "uint256",
+        "name": "_rewardLockupEpochs",
+        "type": "uint256"
+      }
+    ],
+    "name": "boardroomSetLockUp",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_operator",
+        "type": "address"
+      }
+    ],
+    "name": "boardroomSetOperator",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "bomb",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "bombOracle",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "bombPriceCeiling",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "bombPriceOne",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "bondDepletionFloorPercent",
     "outputs": [
       {
@@ -223,10 +368,23 @@
     "type": "function"
   },
   {
+    "inputs": [],
+    "name": "bshare",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "_tombAmount",
+        "name": "_bombAmount",
         "type": "uint256"
       },
       {
@@ -352,6 +510,45 @@
   },
   {
     "inputs": [],
+    "name": "getBombCirculatingSupply",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getBombPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "bombPrice",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "getBombUpdatedPrice",
+    "outputs": [
+      {
+        "internalType": "uint256",
+        "name": "_bombPrice",
+        "type": "uint256"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [],
     "name": "getBondDiscountRate",
     "outputs": [
       {
@@ -378,11 +575,11 @@
   },
   {
     "inputs": [],
-    "name": "getBurnableTombLeft",
+    "name": "getBurnableBombLeft",
     "outputs": [
       {
         "internalType": "uint256",
-        "name": "_burnableTombLeft",
+        "name": "_burnableBombLeft",
         "type": "uint256"
       }
     ],
@@ -416,45 +613,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "getTombCirculatingSupply",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getTombPrice",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "tombPrice",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "getTombUpdatedPrice",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "_tombPrice",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "contract IERC20",
@@ -481,27 +639,27 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_tomb",
+        "name": "_bomb",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "_tbond",
+        "name": "_bbond",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "_tshare",
+        "name": "_bshare",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "_tombOracle",
+        "name": "_bombOracle",
         "type": "address"
       },
       {
         "internalType": "address",
-        "name": "_masonry",
+        "name": "_boardroom",
         "type": "address"
       },
       {
@@ -539,86 +697,6 @@
       }
     ],
     "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "masonry",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "amount",
-        "type": "uint256"
-      }
-    ],
-    "name": "masonryAllocateSeigniorage",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_token",
-        "type": "address"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_amount",
-        "type": "uint256"
-      },
-      {
-        "internalType": "address",
-        "name": "_to",
-        "type": "address"
-      }
-    ],
-    "name": "masonryGovernanceRecoverUnsupported",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_withdrawLockupEpochs",
-        "type": "uint256"
-      },
-      {
-        "internalType": "uint256",
-        "name": "_rewardLockupEpochs",
-        "type": "uint256"
-      }
-    ],
-    "name": "masonrySetLockUp",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_operator",
-        "type": "address"
-      }
-    ],
-    "name": "masonrySetOperator",
-    "outputs": [],
-    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -772,7 +850,7 @@
   },
   {
     "inputs": [],
-    "name": "previousEpochTombPrice",
+    "name": "previousEpochBombPrice",
     "outputs": [
       {
         "internalType": "uint256",
@@ -825,6 +903,45 @@
       }
     ],
     "stateMutability": "view",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_boardroom",
+        "type": "address"
+      }
+    ],
+    "name": "setBoardroom",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "address",
+        "name": "_bombOracle",
+        "type": "address"
+      }
+    ],
+    "name": "setBombOracle",
+    "outputs": [],
+    "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [
+      {
+        "internalType": "uint256",
+        "name": "_bombPriceCeiling",
+        "type": "uint256"
+      }
+    ],
+    "name": "setBombPriceCeiling",
+    "outputs": [],
+    "stateMutability": "nonpayable",
     "type": "function"
   },
   {
@@ -895,19 +1012,6 @@
       }
     ],
     "name": "setExtraFunds",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_masonry",
-        "type": "address"
-      }
-    ],
-    "name": "setMasonry",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -1078,32 +1182,6 @@
     "type": "function"
   },
   {
-    "inputs": [
-      {
-        "internalType": "address",
-        "name": "_tombOracle",
-        "type": "address"
-      }
-    ],
-    "name": "setTombOracle",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [
-      {
-        "internalType": "uint256",
-        "name": "_tombPriceCeiling",
-        "type": "uint256"
-      }
-    ],
-    "name": "setTombPriceCeiling",
-    "outputs": [],
-    "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
     "inputs": [],
     "name": "startTime",
     "outputs": [
@@ -1130,84 +1208,6 @@
         "internalType": "uint256",
         "name": "",
         "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "tbond",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "tomb",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "tombOracle",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "tombPriceCeiling",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "tombPriceOne",
-    "outputs": [
-      {
-        "internalType": "uint256",
-        "name": "",
-        "type": "uint256"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "tshare",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
       }
     ],
     "stateMutability": "view",

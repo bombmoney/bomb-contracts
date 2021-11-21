@@ -41,17 +41,17 @@
     "inputs": [
       {
         "internalType": "uint256",
-        "name": "amtTomb",
+        "name": "amtBomb",
         "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "amtTombMin",
+        "name": "amtBombMin",
         "type": "uint256"
       },
       {
         "internalType": "uint256",
-        "name": "amtFtmMin",
+        "name": "amtEthMin",
         "type": "uint256"
       }
     ],
@@ -85,7 +85,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "amtTomb",
+        "name": "amtBomb",
         "type": "uint256"
       },
       {
@@ -95,7 +95,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "amtTombMin",
+        "name": "amtBombMin",
         "type": "uint256"
       },
       {
@@ -123,6 +123,19 @@
       }
     ],
     "stateMutability": "nonpayable",
+    "type": "function"
+  },
+  {
+    "inputs": [],
+    "name": "bomb",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
     "type": "function"
   },
   {
@@ -332,11 +345,11 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_tombOracle",
+        "name": "_bombOracle",
         "type": "address"
       }
     ],
-    "name": "setTaxableTombOracle",
+    "name": "setTaxableBombOracle",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -397,19 +410,6 @@
     "type": "function"
   },
   {
-    "inputs": [],
-    "name": "tomb",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
-    "type": "function"
-  },
-  {
     "inputs": [
       {
         "internalType": "address",
@@ -463,7 +463,7 @@
   },
   {
     "inputs": [],
-    "name": "wftm",
+    "name": "weth",
     "outputs": [
       {
         "internalType": "address",

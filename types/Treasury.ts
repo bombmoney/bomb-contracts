@@ -21,9 +21,20 @@ export interface TreasuryInterface extends utils.Interface {
   functions: {
     "PERIOD()": FunctionFragment;
     "allocateSeigniorage()": FunctionFragment;
+    "bbond()": FunctionFragment;
+    "boardroom()": FunctionFragment;
+    "boardroomAllocateSeigniorage(uint256)": FunctionFragment;
+    "boardroomGovernanceRecoverUnsupported(address,uint256,address)": FunctionFragment;
+    "boardroomSetLockUp(uint256,uint256)": FunctionFragment;
+    "boardroomSetOperator(address)": FunctionFragment;
+    "bomb()": FunctionFragment;
+    "bombOracle()": FunctionFragment;
+    "bombPriceCeiling()": FunctionFragment;
+    "bombPriceOne()": FunctionFragment;
     "bondDepletionFloorPercent()": FunctionFragment;
     "bootstrapEpochs()": FunctionFragment;
     "bootstrapSupplyExpansionPercent()": FunctionFragment;
+    "bshare()": FunctionFragment;
     "buyBonds(uint256,uint256)": FunctionFragment;
     "daoFund()": FunctionFragment;
     "daoFundSharedPercent()": FunctionFragment;
@@ -33,23 +44,18 @@ export interface TreasuryInterface extends utils.Interface {
     "epoch()": FunctionFragment;
     "epochSupplyContractionLeft()": FunctionFragment;
     "excludedFromTotalSupply(uint256)": FunctionFragment;
+    "getBombCirculatingSupply()": FunctionFragment;
+    "getBombPrice()": FunctionFragment;
+    "getBombUpdatedPrice()": FunctionFragment;
     "getBondDiscountRate()": FunctionFragment;
     "getBondPremiumRate()": FunctionFragment;
-    "getBurnableTombLeft()": FunctionFragment;
+    "getBurnableBombLeft()": FunctionFragment;
     "getRedeemableBonds()": FunctionFragment;
     "getReserve()": FunctionFragment;
-    "getTombCirculatingSupply()": FunctionFragment;
-    "getTombPrice()": FunctionFragment;
-    "getTombUpdatedPrice()": FunctionFragment;
     "governanceRecoverUnsupported(address,uint256,address)": FunctionFragment;
     "initialize(address,address,address,address,address,uint256)": FunctionFragment;
     "initialized()": FunctionFragment;
     "isInitialized()": FunctionFragment;
-    "masonry()": FunctionFragment;
-    "masonryAllocateSeigniorage(uint256)": FunctionFragment;
-    "masonryGovernanceRecoverUnsupported(address,uint256,address)": FunctionFragment;
-    "masonrySetLockUp(uint256,uint256)": FunctionFragment;
-    "masonrySetOperator(address)": FunctionFragment;
     "maxDebtRatioPercent()": FunctionFragment;
     "maxDiscountRate()": FunctionFragment;
     "maxExpansionTiers(uint256)": FunctionFragment;
@@ -61,15 +67,17 @@ export interface TreasuryInterface extends utils.Interface {
     "operator()": FunctionFragment;
     "premiumPercent()": FunctionFragment;
     "premiumThreshold()": FunctionFragment;
-    "previousEpochTombPrice()": FunctionFragment;
+    "previousEpochBombPrice()": FunctionFragment;
     "redeemBonds(uint256,uint256)": FunctionFragment;
     "seigniorageExpansionFloorPercent()": FunctionFragment;
     "seigniorageSaved()": FunctionFragment;
+    "setBoardroom(address)": FunctionFragment;
+    "setBombOracle(address)": FunctionFragment;
+    "setBombPriceCeiling(uint256)": FunctionFragment;
     "setBondDepletionFloorPercent(uint256)": FunctionFragment;
     "setBootstrap(uint256,uint256)": FunctionFragment;
     "setDiscountPercent(uint256)": FunctionFragment;
     "setExtraFunds(address,uint256,address,uint256)": FunctionFragment;
-    "setMasonry(address)": FunctionFragment;
     "setMaxDebtRatioPercent(uint256)": FunctionFragment;
     "setMaxDiscountRate(uint256)": FunctionFragment;
     "setMaxExpansionTiersEntry(uint8,uint256)": FunctionFragment;
@@ -81,21 +89,44 @@ export interface TreasuryInterface extends utils.Interface {
     "setPremiumPercent(uint256)": FunctionFragment;
     "setPremiumThreshold(uint256)": FunctionFragment;
     "setSupplyTiersEntry(uint8,uint256)": FunctionFragment;
-    "setTombOracle(address)": FunctionFragment;
-    "setTombPriceCeiling(uint256)": FunctionFragment;
     "startTime()": FunctionFragment;
     "supplyTiers(uint256)": FunctionFragment;
-    "tbond()": FunctionFragment;
-    "tomb()": FunctionFragment;
-    "tombOracle()": FunctionFragment;
-    "tombPriceCeiling()": FunctionFragment;
-    "tombPriceOne()": FunctionFragment;
-    "tshare()": FunctionFragment;
   };
 
   encodeFunctionData(functionFragment: "PERIOD", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "allocateSeigniorage",
+    values?: undefined
+  ): string;
+  encodeFunctionData(functionFragment: "bbond", values?: undefined): string;
+  encodeFunctionData(functionFragment: "boardroom", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "boardroomAllocateSeigniorage",
+    values: [BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "boardroomGovernanceRecoverUnsupported",
+    values: [string, BigNumberish, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "boardroomSetLockUp",
+    values: [BigNumberish, BigNumberish]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "boardroomSetOperator",
+    values: [string]
+  ): string;
+  encodeFunctionData(functionFragment: "bomb", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "bombOracle",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "bombPriceCeiling",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "bombPriceOne",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -110,6 +141,7 @@ export interface TreasuryInterface extends utils.Interface {
     functionFragment: "bootstrapSupplyExpansionPercent",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "bshare", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "buyBonds",
     values: [BigNumberish, BigNumberish]
@@ -138,6 +170,18 @@ export interface TreasuryInterface extends utils.Interface {
     values: [BigNumberish]
   ): string;
   encodeFunctionData(
+    functionFragment: "getBombCirculatingSupply",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBombPrice",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "getBombUpdatedPrice",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
     functionFragment: "getBondDiscountRate",
     values?: undefined
   ): string;
@@ -146,7 +190,7 @@ export interface TreasuryInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "getBurnableTombLeft",
+    functionFragment: "getBurnableBombLeft",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -155,18 +199,6 @@ export interface TreasuryInterface extends utils.Interface {
   ): string;
   encodeFunctionData(
     functionFragment: "getReserve",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTombCirculatingSupply",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTombPrice",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "getTombUpdatedPrice",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -184,23 +216,6 @@ export interface TreasuryInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "isInitialized",
     values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "masonry", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "masonryAllocateSeigniorage",
-    values: [BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "masonryGovernanceRecoverUnsupported",
-    values: [string, BigNumberish, string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "masonrySetLockUp",
-    values: [BigNumberish, BigNumberish]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "masonrySetOperator",
-    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "maxDebtRatioPercent",
@@ -244,7 +259,7 @@ export interface TreasuryInterface extends utils.Interface {
     values?: undefined
   ): string;
   encodeFunctionData(
-    functionFragment: "previousEpochTombPrice",
+    functionFragment: "previousEpochBombPrice",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -258,6 +273,18 @@ export interface TreasuryInterface extends utils.Interface {
   encodeFunctionData(
     functionFragment: "seigniorageSaved",
     values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setBoardroom",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setBombOracle",
+    values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setBombPriceCeiling",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "setBondDepletionFloorPercent",
@@ -275,7 +302,6 @@ export interface TreasuryInterface extends utils.Interface {
     functionFragment: "setExtraFunds",
     values: [string, BigNumberish, string, BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "setMasonry", values: [string]): string;
   encodeFunctionData(
     functionFragment: "setMaxDebtRatioPercent",
     values: [BigNumberish]
@@ -317,38 +343,43 @@ export interface TreasuryInterface extends utils.Interface {
     functionFragment: "setSupplyTiersEntry",
     values: [BigNumberish, BigNumberish]
   ): string;
-  encodeFunctionData(
-    functionFragment: "setTombOracle",
-    values: [string]
-  ): string;
-  encodeFunctionData(
-    functionFragment: "setTombPriceCeiling",
-    values: [BigNumberish]
-  ): string;
   encodeFunctionData(functionFragment: "startTime", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "supplyTiers",
     values: [BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "tbond", values?: undefined): string;
-  encodeFunctionData(functionFragment: "tomb", values?: undefined): string;
-  encodeFunctionData(
-    functionFragment: "tombOracle",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "tombPriceCeiling",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
-    functionFragment: "tombPriceOne",
-    values?: undefined
-  ): string;
-  encodeFunctionData(functionFragment: "tshare", values?: undefined): string;
 
   decodeFunctionResult(functionFragment: "PERIOD", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "allocateSeigniorage",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "bbond", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "boardroom", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "boardroomAllocateSeigniorage",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "boardroomGovernanceRecoverUnsupported",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "boardroomSetLockUp",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "boardroomSetOperator",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "bomb", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "bombOracle", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "bombPriceCeiling",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "bombPriceOne",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -363,6 +394,7 @@ export interface TreasuryInterface extends utils.Interface {
     functionFragment: "bootstrapSupplyExpansionPercent",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "bshare", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "buyBonds", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "daoFund", data: BytesLike): Result;
   decodeFunctionResult(
@@ -388,6 +420,18 @@ export interface TreasuryInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "getBombCirculatingSupply",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBombPrice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "getBombUpdatedPrice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "getBondDiscountRate",
     data: BytesLike
   ): Result;
@@ -396,7 +440,7 @@ export interface TreasuryInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "getBurnableTombLeft",
+    functionFragment: "getBurnableBombLeft",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -404,18 +448,6 @@ export interface TreasuryInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "getReserve", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "getTombCirculatingSupply",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getTombPrice",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "getTombUpdatedPrice",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(
     functionFragment: "governanceRecoverUnsupported",
     data: BytesLike
@@ -427,23 +459,6 @@ export interface TreasuryInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "isInitialized",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "masonry", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "masonryAllocateSeigniorage",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "masonryGovernanceRecoverUnsupported",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "masonrySetLockUp",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "masonrySetOperator",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -488,7 +503,7 @@ export interface TreasuryInterface extends utils.Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
-    functionFragment: "previousEpochTombPrice",
+    functionFragment: "previousEpochBombPrice",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -501,6 +516,18 @@ export interface TreasuryInterface extends utils.Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "seigniorageSaved",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setBoardroom",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setBombOracle",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "setBombPriceCeiling",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -519,7 +546,6 @@ export interface TreasuryInterface extends utils.Interface {
     functionFragment: "setExtraFunds",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "setMasonry", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setMaxDebtRatioPercent",
     data: BytesLike
@@ -564,56 +590,43 @@ export interface TreasuryInterface extends utils.Interface {
     functionFragment: "setSupplyTiersEntry",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTombOracle",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "setTombPriceCeiling",
-    data: BytesLike
-  ): Result;
   decodeFunctionResult(functionFragment: "startTime", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "supplyTiers",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "tbond", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "tomb", data: BytesLike): Result;
-  decodeFunctionResult(functionFragment: "tombOracle", data: BytesLike): Result;
-  decodeFunctionResult(
-    functionFragment: "tombPriceCeiling",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(
-    functionFragment: "tombPriceOne",
-    data: BytesLike
-  ): Result;
-  decodeFunctionResult(functionFragment: "tshare", data: BytesLike): Result;
 
   events: {
+    "BoardroomFunded(uint256,uint256)": EventFragment;
     "BoughtBonds(address,uint256,uint256)": EventFragment;
     "BurnedBonds(address,uint256)": EventFragment;
     "DaoFundFunded(uint256,uint256)": EventFragment;
     "DevFundFunded(uint256,uint256)": EventFragment;
     "Initialized(address,uint256)": EventFragment;
-    "MasonryFunded(uint256,uint256)": EventFragment;
     "RedeemedBonds(address,uint256,uint256)": EventFragment;
     "TreasuryFunded(uint256,uint256)": EventFragment;
   };
 
+  getEvent(nameOrSignatureOrTopic: "BoardroomFunded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BoughtBonds"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "BurnedBonds"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "DaoFundFunded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "DevFundFunded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Initialized"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "MasonryFunded"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "RedeemedBonds"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "TreasuryFunded"): EventFragment;
 }
 
+export type BoardroomFundedEvent = TypedEvent<
+  [BigNumber, BigNumber],
+  { timestamp: BigNumber; seigniorage: BigNumber }
+>;
+
+export type BoardroomFundedEventFilter = TypedEventFilter<BoardroomFundedEvent>;
+
 export type BoughtBondsEvent = TypedEvent<
   [string, BigNumber, BigNumber],
-  { from: string; tombAmount: BigNumber; bondAmount: BigNumber }
+  { from: string; bombAmount: BigNumber; bondAmount: BigNumber }
 >;
 
 export type BoughtBondsEventFilter = TypedEventFilter<BoughtBondsEvent>;
@@ -646,16 +659,9 @@ export type InitializedEvent = TypedEvent<
 
 export type InitializedEventFilter = TypedEventFilter<InitializedEvent>;
 
-export type MasonryFundedEvent = TypedEvent<
-  [BigNumber, BigNumber],
-  { timestamp: BigNumber; seigniorage: BigNumber }
->;
-
-export type MasonryFundedEventFilter = TypedEventFilter<MasonryFundedEvent>;
-
 export type RedeemedBondsEvent = TypedEvent<
   [string, BigNumber, BigNumber],
-  { from: string; tombAmount: BigNumber; bondAmount: BigNumber }
+  { from: string; bombAmount: BigNumber; bondAmount: BigNumber }
 >;
 
 export type RedeemedBondsEventFilter = TypedEventFilter<RedeemedBondsEvent>;
@@ -700,6 +706,41 @@ export interface Treasury extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    bbond(overrides?: CallOverrides): Promise<[string]>;
+
+    boardroom(overrides?: CallOverrides): Promise<[string]>;
+
+    boardroomAllocateSeigniorage(
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    boardroomGovernanceRecoverUnsupported(
+      _token: string,
+      _amount: BigNumberish,
+      _to: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    boardroomSetLockUp(
+      _withdrawLockupEpochs: BigNumberish,
+      _rewardLockupEpochs: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    boardroomSetOperator(
+      _operator: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    bomb(overrides?: CallOverrides): Promise<[string]>;
+
+    bombOracle(overrides?: CallOverrides): Promise<[string]>;
+
+    bombPriceCeiling(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    bombPriceOne(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     bondDepletionFloorPercent(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     bootstrapEpochs(overrides?: CallOverrides): Promise<[BigNumber]>;
@@ -708,8 +749,10 @@ export interface Treasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
 
+    bshare(overrides?: CallOverrides): Promise<[string]>;
+
     buyBonds(
-      _tombAmount: BigNumberish,
+      _bombAmount: BigNumberish,
       targetPrice: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -733,6 +776,16 @@ export interface Treasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    getBombCirculatingSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    getBombPrice(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { bombPrice: BigNumber }>;
+
+    getBombUpdatedPrice(
+      overrides?: CallOverrides
+    ): Promise<[BigNumber] & { _bombPrice: BigNumber }>;
+
     getBondDiscountRate(
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { _rate: BigNumber }>;
@@ -741,25 +794,15 @@ export interface Treasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { _rate: BigNumber }>;
 
-    getBurnableTombLeft(
+    getBurnableBombLeft(
       overrides?: CallOverrides
-    ): Promise<[BigNumber] & { _burnableTombLeft: BigNumber }>;
+    ): Promise<[BigNumber] & { _burnableBombLeft: BigNumber }>;
 
     getRedeemableBonds(
       overrides?: CallOverrides
     ): Promise<[BigNumber] & { _redeemableBonds: BigNumber }>;
 
     getReserve(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    getTombCirculatingSupply(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    getTombPrice(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { tombPrice: BigNumber }>;
-
-    getTombUpdatedPrice(
-      overrides?: CallOverrides
-    ): Promise<[BigNumber] & { _tombPrice: BigNumber }>;
 
     governanceRecoverUnsupported(
       _token: string,
@@ -769,11 +812,11 @@ export interface Treasury extends BaseContract {
     ): Promise<ContractTransaction>;
 
     initialize(
-      _tomb: string,
-      _tbond: string,
-      _tshare: string,
-      _tombOracle: string,
-      _masonry: string,
+      _bomb: string,
+      _bbond: string,
+      _bshare: string,
+      _bombOracle: string,
+      _boardroom: string,
       _startTime: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
@@ -781,31 +824,6 @@ export interface Treasury extends BaseContract {
     initialized(overrides?: CallOverrides): Promise<[boolean]>;
 
     isInitialized(overrides?: CallOverrides): Promise<[boolean]>;
-
-    masonry(overrides?: CallOverrides): Promise<[string]>;
-
-    masonryAllocateSeigniorage(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    masonryGovernanceRecoverUnsupported(
-      _token: string,
-      _amount: BigNumberish,
-      _to: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    masonrySetLockUp(
-      _withdrawLockupEpochs: BigNumberish,
-      _rewardLockupEpochs: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    masonrySetOperator(
-      _operator: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
 
     maxDebtRatioPercent(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -834,7 +852,7 @@ export interface Treasury extends BaseContract {
 
     premiumThreshold(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    previousEpochTombPrice(overrides?: CallOverrides): Promise<[BigNumber]>;
+    previousEpochBombPrice(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     redeemBonds(
       _bondAmount: BigNumberish,
@@ -847,6 +865,21 @@ export interface Treasury extends BaseContract {
     ): Promise<[BigNumber]>;
 
     seigniorageSaved(overrides?: CallOverrides): Promise<[BigNumber]>;
+
+    setBoardroom(
+      _boardroom: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setBombOracle(
+      _bombOracle: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
+    setBombPriceCeiling(
+      _bombPriceCeiling: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
 
     setBondDepletionFloorPercent(
       _bondDepletionFloorPercent: BigNumberish,
@@ -869,11 +902,6 @@ export interface Treasury extends BaseContract {
       _daoFundSharedPercent: BigNumberish,
       _devFund: string,
       _devFundSharedPercent: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    setMasonry(
-      _masonry: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
@@ -934,34 +962,12 @@ export interface Treasury extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
-    setTombOracle(
-      _tombOracle: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
-    setTombPriceCeiling(
-      _tombPriceCeiling: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>;
-
     startTime(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     supplyTiers(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[BigNumber]>;
-
-    tbond(overrides?: CallOverrides): Promise<[string]>;
-
-    tomb(overrides?: CallOverrides): Promise<[string]>;
-
-    tombOracle(overrides?: CallOverrides): Promise<[string]>;
-
-    tombPriceCeiling(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    tombPriceOne(overrides?: CallOverrides): Promise<[BigNumber]>;
-
-    tshare(overrides?: CallOverrides): Promise<[string]>;
   };
 
   PERIOD(overrides?: CallOverrides): Promise<BigNumber>;
@@ -969,6 +975,41 @@ export interface Treasury extends BaseContract {
   allocateSeigniorage(
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
+
+  bbond(overrides?: CallOverrides): Promise<string>;
+
+  boardroom(overrides?: CallOverrides): Promise<string>;
+
+  boardroomAllocateSeigniorage(
+    amount: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  boardroomGovernanceRecoverUnsupported(
+    _token: string,
+    _amount: BigNumberish,
+    _to: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  boardroomSetLockUp(
+    _withdrawLockupEpochs: BigNumberish,
+    _rewardLockupEpochs: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  boardroomSetOperator(
+    _operator: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  bomb(overrides?: CallOverrides): Promise<string>;
+
+  bombOracle(overrides?: CallOverrides): Promise<string>;
+
+  bombPriceCeiling(overrides?: CallOverrides): Promise<BigNumber>;
+
+  bombPriceOne(overrides?: CallOverrides): Promise<BigNumber>;
 
   bondDepletionFloorPercent(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -978,8 +1019,10 @@ export interface Treasury extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
+  bshare(overrides?: CallOverrides): Promise<string>;
+
   buyBonds(
-    _tombAmount: BigNumberish,
+    _bombAmount: BigNumberish,
     targetPrice: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -1003,21 +1046,21 @@ export interface Treasury extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  getBombCirculatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+  getBombPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
+  getBombUpdatedPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
   getBondDiscountRate(overrides?: CallOverrides): Promise<BigNumber>;
 
   getBondPremiumRate(overrides?: CallOverrides): Promise<BigNumber>;
 
-  getBurnableTombLeft(overrides?: CallOverrides): Promise<BigNumber>;
+  getBurnableBombLeft(overrides?: CallOverrides): Promise<BigNumber>;
 
   getRedeemableBonds(overrides?: CallOverrides): Promise<BigNumber>;
 
   getReserve(overrides?: CallOverrides): Promise<BigNumber>;
-
-  getTombCirculatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
-
-  getTombPrice(overrides?: CallOverrides): Promise<BigNumber>;
-
-  getTombUpdatedPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
   governanceRecoverUnsupported(
     _token: string,
@@ -1027,11 +1070,11 @@ export interface Treasury extends BaseContract {
   ): Promise<ContractTransaction>;
 
   initialize(
-    _tomb: string,
-    _tbond: string,
-    _tshare: string,
-    _tombOracle: string,
-    _masonry: string,
+    _bomb: string,
+    _bbond: string,
+    _bshare: string,
+    _bombOracle: string,
+    _boardroom: string,
     _startTime: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
@@ -1039,31 +1082,6 @@ export interface Treasury extends BaseContract {
   initialized(overrides?: CallOverrides): Promise<boolean>;
 
   isInitialized(overrides?: CallOverrides): Promise<boolean>;
-
-  masonry(overrides?: CallOverrides): Promise<string>;
-
-  masonryAllocateSeigniorage(
-    amount: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  masonryGovernanceRecoverUnsupported(
-    _token: string,
-    _amount: BigNumberish,
-    _to: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  masonrySetLockUp(
-    _withdrawLockupEpochs: BigNumberish,
-    _rewardLockupEpochs: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  masonrySetOperator(
-    _operator: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
 
   maxDebtRatioPercent(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1090,7 +1108,7 @@ export interface Treasury extends BaseContract {
 
   premiumThreshold(overrides?: CallOverrides): Promise<BigNumber>;
 
-  previousEpochTombPrice(overrides?: CallOverrides): Promise<BigNumber>;
+  previousEpochBombPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
   redeemBonds(
     _bondAmount: BigNumberish,
@@ -1103,6 +1121,21 @@ export interface Treasury extends BaseContract {
   ): Promise<BigNumber>;
 
   seigniorageSaved(overrides?: CallOverrides): Promise<BigNumber>;
+
+  setBoardroom(
+    _boardroom: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setBombOracle(
+    _bombOracle: string,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
+  setBombPriceCeiling(
+    _bombPriceCeiling: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
 
   setBondDepletionFloorPercent(
     _bondDepletionFloorPercent: BigNumberish,
@@ -1125,11 +1158,6 @@ export interface Treasury extends BaseContract {
     _daoFundSharedPercent: BigNumberish,
     _devFund: string,
     _devFundSharedPercent: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  setMasonry(
-    _masonry: string,
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
@@ -1190,16 +1218,6 @@ export interface Treasury extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
-  setTombOracle(
-    _tombOracle: string,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
-  setTombPriceCeiling(
-    _tombPriceCeiling: BigNumberish,
-    overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>;
-
   startTime(overrides?: CallOverrides): Promise<BigNumber>;
 
   supplyTiers(
@@ -1207,22 +1225,45 @@ export interface Treasury extends BaseContract {
     overrides?: CallOverrides
   ): Promise<BigNumber>;
 
-  tbond(overrides?: CallOverrides): Promise<string>;
-
-  tomb(overrides?: CallOverrides): Promise<string>;
-
-  tombOracle(overrides?: CallOverrides): Promise<string>;
-
-  tombPriceCeiling(overrides?: CallOverrides): Promise<BigNumber>;
-
-  tombPriceOne(overrides?: CallOverrides): Promise<BigNumber>;
-
-  tshare(overrides?: CallOverrides): Promise<string>;
-
   callStatic: {
     PERIOD(overrides?: CallOverrides): Promise<BigNumber>;
 
     allocateSeigniorage(overrides?: CallOverrides): Promise<void>;
+
+    bbond(overrides?: CallOverrides): Promise<string>;
+
+    boardroom(overrides?: CallOverrides): Promise<string>;
+
+    boardroomAllocateSeigniorage(
+      amount: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    boardroomGovernanceRecoverUnsupported(
+      _token: string,
+      _amount: BigNumberish,
+      _to: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    boardroomSetLockUp(
+      _withdrawLockupEpochs: BigNumberish,
+      _rewardLockupEpochs: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    boardroomSetOperator(
+      _operator: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    bomb(overrides?: CallOverrides): Promise<string>;
+
+    bombOracle(overrides?: CallOverrides): Promise<string>;
+
+    bombPriceCeiling(overrides?: CallOverrides): Promise<BigNumber>;
+
+    bombPriceOne(overrides?: CallOverrides): Promise<BigNumber>;
 
     bondDepletionFloorPercent(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1232,8 +1273,10 @@ export interface Treasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    bshare(overrides?: CallOverrides): Promise<string>;
+
     buyBonds(
-      _tombAmount: BigNumberish,
+      _bombAmount: BigNumberish,
       targetPrice: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -1257,21 +1300,21 @@ export interface Treasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<string>;
 
+    getBombCirculatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getBombPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getBombUpdatedPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
     getBondDiscountRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     getBondPremiumRate(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getBurnableTombLeft(overrides?: CallOverrides): Promise<BigNumber>;
+    getBurnableBombLeft(overrides?: CallOverrides): Promise<BigNumber>;
 
     getRedeemableBonds(overrides?: CallOverrides): Promise<BigNumber>;
 
     getReserve(overrides?: CallOverrides): Promise<BigNumber>;
-
-    getTombCirculatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
-
-    getTombPrice(overrides?: CallOverrides): Promise<BigNumber>;
-
-    getTombUpdatedPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
     governanceRecoverUnsupported(
       _token: string,
@@ -1281,11 +1324,11 @@ export interface Treasury extends BaseContract {
     ): Promise<void>;
 
     initialize(
-      _tomb: string,
-      _tbond: string,
-      _tshare: string,
-      _tombOracle: string,
-      _masonry: string,
+      _bomb: string,
+      _bbond: string,
+      _bshare: string,
+      _bombOracle: string,
+      _boardroom: string,
       _startTime: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
@@ -1293,31 +1336,6 @@ export interface Treasury extends BaseContract {
     initialized(overrides?: CallOverrides): Promise<boolean>;
 
     isInitialized(overrides?: CallOverrides): Promise<boolean>;
-
-    masonry(overrides?: CallOverrides): Promise<string>;
-
-    masonryAllocateSeigniorage(
-      amount: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    masonryGovernanceRecoverUnsupported(
-      _token: string,
-      _amount: BigNumberish,
-      _to: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    masonrySetLockUp(
-      _withdrawLockupEpochs: BigNumberish,
-      _rewardLockupEpochs: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    masonrySetOperator(
-      _operator: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
 
     maxDebtRatioPercent(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1344,7 +1362,7 @@ export interface Treasury extends BaseContract {
 
     premiumThreshold(overrides?: CallOverrides): Promise<BigNumber>;
 
-    previousEpochTombPrice(overrides?: CallOverrides): Promise<BigNumber>;
+    previousEpochBombPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
     redeemBonds(
       _bondAmount: BigNumberish,
@@ -1357,6 +1375,18 @@ export interface Treasury extends BaseContract {
     ): Promise<BigNumber>;
 
     seigniorageSaved(overrides?: CallOverrides): Promise<BigNumber>;
+
+    setBoardroom(_boardroom: string, overrides?: CallOverrides): Promise<void>;
+
+    setBombOracle(
+      _bombOracle: string,
+      overrides?: CallOverrides
+    ): Promise<void>;
+
+    setBombPriceCeiling(
+      _bombPriceCeiling: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     setBondDepletionFloorPercent(
       _bondDepletionFloorPercent: BigNumberish,
@@ -1381,8 +1411,6 @@ export interface Treasury extends BaseContract {
       _devFundSharedPercent: BigNumberish,
       overrides?: CallOverrides
     ): Promise<void>;
-
-    setMasonry(_masonry: string, overrides?: CallOverrides): Promise<void>;
 
     setMaxDebtRatioPercent(
       _maxDebtRatioPercent: BigNumberish,
@@ -1438,45 +1466,32 @@ export interface Treasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<boolean>;
 
-    setTombOracle(
-      _tombOracle: string,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
-    setTombPriceCeiling(
-      _tombPriceCeiling: BigNumberish,
-      overrides?: CallOverrides
-    ): Promise<void>;
-
     startTime(overrides?: CallOverrides): Promise<BigNumber>;
 
     supplyTiers(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    tbond(overrides?: CallOverrides): Promise<string>;
-
-    tomb(overrides?: CallOverrides): Promise<string>;
-
-    tombOracle(overrides?: CallOverrides): Promise<string>;
-
-    tombPriceCeiling(overrides?: CallOverrides): Promise<BigNumber>;
-
-    tombPriceOne(overrides?: CallOverrides): Promise<BigNumber>;
-
-    tshare(overrides?: CallOverrides): Promise<string>;
   };
 
   filters: {
+    "BoardroomFunded(uint256,uint256)"(
+      timestamp?: null,
+      seigniorage?: null
+    ): BoardroomFundedEventFilter;
+    BoardroomFunded(
+      timestamp?: null,
+      seigniorage?: null
+    ): BoardroomFundedEventFilter;
+
     "BoughtBonds(address,uint256,uint256)"(
       from?: string | null,
-      tombAmount?: null,
+      bombAmount?: null,
       bondAmount?: null
     ): BoughtBondsEventFilter;
     BoughtBonds(
       from?: string | null,
-      tombAmount?: null,
+      bombAmount?: null,
       bondAmount?: null
     ): BoughtBondsEventFilter;
 
@@ -1513,23 +1528,14 @@ export interface Treasury extends BaseContract {
     ): InitializedEventFilter;
     Initialized(executor?: string | null, at?: null): InitializedEventFilter;
 
-    "MasonryFunded(uint256,uint256)"(
-      timestamp?: null,
-      seigniorage?: null
-    ): MasonryFundedEventFilter;
-    MasonryFunded(
-      timestamp?: null,
-      seigniorage?: null
-    ): MasonryFundedEventFilter;
-
     "RedeemedBonds(address,uint256,uint256)"(
       from?: string | null,
-      tombAmount?: null,
+      bombAmount?: null,
       bondAmount?: null
     ): RedeemedBondsEventFilter;
     RedeemedBonds(
       from?: string | null,
-      tombAmount?: null,
+      bombAmount?: null,
       bondAmount?: null
     ): RedeemedBondsEventFilter;
 
@@ -1550,6 +1556,41 @@ export interface Treasury extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    bbond(overrides?: CallOverrides): Promise<BigNumber>;
+
+    boardroom(overrides?: CallOverrides): Promise<BigNumber>;
+
+    boardroomAllocateSeigniorage(
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    boardroomGovernanceRecoverUnsupported(
+      _token: string,
+      _amount: BigNumberish,
+      _to: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    boardroomSetLockUp(
+      _withdrawLockupEpochs: BigNumberish,
+      _rewardLockupEpochs: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    boardroomSetOperator(
+      _operator: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    bomb(overrides?: CallOverrides): Promise<BigNumber>;
+
+    bombOracle(overrides?: CallOverrides): Promise<BigNumber>;
+
+    bombPriceCeiling(overrides?: CallOverrides): Promise<BigNumber>;
+
+    bombPriceOne(overrides?: CallOverrides): Promise<BigNumber>;
+
     bondDepletionFloorPercent(overrides?: CallOverrides): Promise<BigNumber>;
 
     bootstrapEpochs(overrides?: CallOverrides): Promise<BigNumber>;
@@ -1558,8 +1599,10 @@ export interface Treasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    bshare(overrides?: CallOverrides): Promise<BigNumber>;
+
     buyBonds(
-      _tombAmount: BigNumberish,
+      _bombAmount: BigNumberish,
       targetPrice: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -1583,21 +1626,21 @@ export interface Treasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getBombCirculatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getBombPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
+    getBombUpdatedPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
     getBondDiscountRate(overrides?: CallOverrides): Promise<BigNumber>;
 
     getBondPremiumRate(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getBurnableTombLeft(overrides?: CallOverrides): Promise<BigNumber>;
+    getBurnableBombLeft(overrides?: CallOverrides): Promise<BigNumber>;
 
     getRedeemableBonds(overrides?: CallOverrides): Promise<BigNumber>;
 
     getReserve(overrides?: CallOverrides): Promise<BigNumber>;
-
-    getTombCirculatingSupply(overrides?: CallOverrides): Promise<BigNumber>;
-
-    getTombPrice(overrides?: CallOverrides): Promise<BigNumber>;
-
-    getTombUpdatedPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
     governanceRecoverUnsupported(
       _token: string,
@@ -1607,11 +1650,11 @@ export interface Treasury extends BaseContract {
     ): Promise<BigNumber>;
 
     initialize(
-      _tomb: string,
-      _tbond: string,
-      _tshare: string,
-      _tombOracle: string,
-      _masonry: string,
+      _bomb: string,
+      _bbond: string,
+      _bshare: string,
+      _bombOracle: string,
+      _boardroom: string,
       _startTime: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
@@ -1619,31 +1662,6 @@ export interface Treasury extends BaseContract {
     initialized(overrides?: CallOverrides): Promise<BigNumber>;
 
     isInitialized(overrides?: CallOverrides): Promise<BigNumber>;
-
-    masonry(overrides?: CallOverrides): Promise<BigNumber>;
-
-    masonryAllocateSeigniorage(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    masonryGovernanceRecoverUnsupported(
-      _token: string,
-      _amount: BigNumberish,
-      _to: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    masonrySetLockUp(
-      _withdrawLockupEpochs: BigNumberish,
-      _rewardLockupEpochs: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    masonrySetOperator(
-      _operator: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
 
     maxDebtRatioPercent(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -1670,7 +1688,7 @@ export interface Treasury extends BaseContract {
 
     premiumThreshold(overrides?: CallOverrides): Promise<BigNumber>;
 
-    previousEpochTombPrice(overrides?: CallOverrides): Promise<BigNumber>;
+    previousEpochBombPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
     redeemBonds(
       _bondAmount: BigNumberish,
@@ -1683,6 +1701,21 @@ export interface Treasury extends BaseContract {
     ): Promise<BigNumber>;
 
     seigniorageSaved(overrides?: CallOverrides): Promise<BigNumber>;
+
+    setBoardroom(
+      _boardroom: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setBombOracle(
+      _bombOracle: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
+    setBombPriceCeiling(
+      _bombPriceCeiling: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
 
     setBondDepletionFloorPercent(
       _bondDepletionFloorPercent: BigNumberish,
@@ -1705,11 +1738,6 @@ export interface Treasury extends BaseContract {
       _daoFundSharedPercent: BigNumberish,
       _devFund: string,
       _devFundSharedPercent: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    setMasonry(
-      _masonry: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
@@ -1770,34 +1798,12 @@ export interface Treasury extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
-    setTombOracle(
-      _tombOracle: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
-    setTombPriceCeiling(
-      _tombPriceCeiling: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>;
-
     startTime(overrides?: CallOverrides): Promise<BigNumber>;
 
     supplyTiers(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    tbond(overrides?: CallOverrides): Promise<BigNumber>;
-
-    tomb(overrides?: CallOverrides): Promise<BigNumber>;
-
-    tombOracle(overrides?: CallOverrides): Promise<BigNumber>;
-
-    tombPriceCeiling(overrides?: CallOverrides): Promise<BigNumber>;
-
-    tombPriceOne(overrides?: CallOverrides): Promise<BigNumber>;
-
-    tshare(overrides?: CallOverrides): Promise<BigNumber>;
   };
 
   populateTransaction: {
@@ -1806,6 +1812,41 @@ export interface Treasury extends BaseContract {
     allocateSeigniorage(
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
+
+    bbond(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    boardroom(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    boardroomAllocateSeigniorage(
+      amount: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    boardroomGovernanceRecoverUnsupported(
+      _token: string,
+      _amount: BigNumberish,
+      _to: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    boardroomSetLockUp(
+      _withdrawLockupEpochs: BigNumberish,
+      _rewardLockupEpochs: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    boardroomSetOperator(
+      _operator: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    bomb(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    bombOracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    bombPriceCeiling(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    bombPriceOne(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     bondDepletionFloorPercent(
       overrides?: CallOverrides
@@ -1817,8 +1858,10 @@ export interface Treasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    bshare(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
     buyBonds(
-      _tombAmount: BigNumberish,
+      _bombAmount: BigNumberish,
       targetPrice: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -1848,6 +1891,16 @@ export interface Treasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
+    getBombCirculatingSupply(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    getBombPrice(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    getBombUpdatedPrice(
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
     getBondDiscountRate(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
@@ -1856,7 +1909,7 @@ export interface Treasury extends BaseContract {
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
-    getBurnableTombLeft(
+    getBurnableBombLeft(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1866,16 +1919,6 @@ export interface Treasury extends BaseContract {
 
     getReserve(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    getTombCirculatingSupply(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
-    getTombPrice(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    getTombUpdatedPrice(
-      overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>;
-
     governanceRecoverUnsupported(
       _token: string,
       _amount: BigNumberish,
@@ -1884,11 +1927,11 @@ export interface Treasury extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     initialize(
-      _tomb: string,
-      _tbond: string,
-      _tshare: string,
-      _tombOracle: string,
-      _masonry: string,
+      _bomb: string,
+      _bbond: string,
+      _bshare: string,
+      _bombOracle: string,
+      _boardroom: string,
       _startTime: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
@@ -1896,31 +1939,6 @@ export interface Treasury extends BaseContract {
     initialized(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     isInitialized(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    masonry(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    masonryAllocateSeigniorage(
-      amount: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    masonryGovernanceRecoverUnsupported(
-      _token: string,
-      _amount: BigNumberish,
-      _to: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    masonrySetLockUp(
-      _withdrawLockupEpochs: BigNumberish,
-      _rewardLockupEpochs: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    masonrySetOperator(
-      _operator: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
 
     maxDebtRatioPercent(
       overrides?: CallOverrides
@@ -1955,7 +1973,7 @@ export interface Treasury extends BaseContract {
 
     premiumThreshold(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    previousEpochTombPrice(
+    previousEpochBombPrice(
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 
@@ -1970,6 +1988,21 @@ export interface Treasury extends BaseContract {
     ): Promise<PopulatedTransaction>;
 
     seigniorageSaved(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+
+    setBoardroom(
+      _boardroom: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setBombOracle(
+      _bombOracle: string,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setBombPriceCeiling(
+      _bombPriceCeiling: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
 
     setBondDepletionFloorPercent(
       _bondDepletionFloorPercent: BigNumberish,
@@ -1992,11 +2025,6 @@ export interface Treasury extends BaseContract {
       _daoFundSharedPercent: BigNumberish,
       _devFund: string,
       _devFundSharedPercent: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setMasonry(
-      _masonry: string,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
@@ -2057,33 +2085,11 @@ export interface Treasury extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 
-    setTombOracle(
-      _tombOracle: string,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
-    setTombPriceCeiling(
-      _tombPriceCeiling: BigNumberish,
-      overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>;
-
     startTime(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     supplyTiers(
       arg0: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    tbond(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    tomb(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    tombOracle(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    tombPriceCeiling(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    tombPriceOne(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
-    tshare(overrides?: CallOverrides): Promise<PopulatedTransaction>;
   };
 }

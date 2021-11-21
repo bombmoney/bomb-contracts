@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_tomb",
+        "name": "_bomb",
         "type": "address"
       }
     ],
@@ -47,6 +47,19 @@
     ],
     "name": "OwnershipTransferred",
     "type": "event"
+  },
+  {
+    "inputs": [],
+    "name": "bomb",
+    "outputs": [
+      {
+        "internalType": "address",
+        "name": "",
+        "type": "address"
+      }
+    ],
+    "stateMutability": "view",
+    "type": "function"
   },
   {
     "inputs": [],
@@ -237,26 +250,13 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_tombOracle",
+        "name": "_bombOracle",
         "type": "address"
       }
     ],
-    "name": "setTaxableTombOracle",
+    "name": "setTaxableBombOracle",
     "outputs": [],
     "stateMutability": "nonpayable",
-    "type": "function"
-  },
-  {
-    "inputs": [],
-    "name": "tomb",
-    "outputs": [
-      {
-        "internalType": "address",
-        "name": "",
-        "type": "address"
-      }
-    ],
-    "stateMutability": "view",
     "type": "function"
   },
   {

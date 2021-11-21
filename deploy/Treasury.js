@@ -7,15 +7,15 @@ module.exports = async function ({
 
     const { deployer, dev } = await getNamedAccounts();
 
-    //  const tomb = await ethers.getContract("Tomb");
+    //  const bomb = await ethers.getContract("Bomb");
 
     await deploy("Treasury", {
         from: deployer,
-        //  args: [tomb.address, 1637284903],
+        //  args: [bomb.address, 1637284903],
         log: true,
         deterministicDeployment: false,
     });
 };
 
 module.exports.tags = ["Treasury"];
-module.exports.dependencies = ["Tomb", "TShare", "TombRewardPool", "TShareRewardPool"];
+//module.exports.dependencies = ["Bomb", "BShare", "BombRewardPool", "BShareRewardPool"];

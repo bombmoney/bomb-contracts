@@ -81,6 +81,19 @@ const _abi = [
   {
     inputs: [
       {
+        internalType: "address",
+        name: "_bombOracle",
+        type: "address",
+      },
+    ],
+    name: "setBombOracle",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "uint256",
         name: "_burnThreshold",
         type: "uint256",
@@ -175,19 +188,6 @@ const _abi = [
         type: "bool",
       },
     ],
-    stateMutability: "nonpayable",
-    type: "function",
-  },
-  {
-    inputs: [
-      {
-        internalType: "address",
-        name: "_tombOracle",
-        type: "address",
-      },
-    ],
-    name: "setTombOracle",
-    outputs: [],
     stateMutability: "nonpayable",
     type: "function",
   },

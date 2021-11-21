@@ -21,7 +21,7 @@ export interface ITreasuryInterface extends utils.Interface {
   functions: {
     "buyBonds(uint256,uint256)": FunctionFragment;
     "epoch()": FunctionFragment;
-    "getTombPrice()": FunctionFragment;
+    "getBombPrice()": FunctionFragment;
     "nextEpochPoint()": FunctionFragment;
     "redeemBonds(uint256,uint256)": FunctionFragment;
   };
@@ -32,7 +32,7 @@ export interface ITreasuryInterface extends utils.Interface {
   ): string;
   encodeFunctionData(functionFragment: "epoch", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: "getTombPrice",
+    functionFragment: "getBombPrice",
     values?: undefined
   ): string;
   encodeFunctionData(
@@ -47,7 +47,7 @@ export interface ITreasuryInterface extends utils.Interface {
   decodeFunctionResult(functionFragment: "buyBonds", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "epoch", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: "getTombPrice",
+    functionFragment: "getBombPrice",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -97,7 +97,7 @@ export interface ITreasury extends BaseContract {
 
     epoch(overrides?: CallOverrides): Promise<[BigNumber]>;
 
-    getTombPrice(overrides?: CallOverrides): Promise<[BigNumber]>;
+    getBombPrice(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     nextEpochPoint(overrides?: CallOverrides): Promise<[BigNumber]>;
 
@@ -116,7 +116,7 @@ export interface ITreasury extends BaseContract {
 
   epoch(overrides?: CallOverrides): Promise<BigNumber>;
 
-  getTombPrice(overrides?: CallOverrides): Promise<BigNumber>;
+  getBombPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
   nextEpochPoint(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -135,7 +135,7 @@ export interface ITreasury extends BaseContract {
 
     epoch(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getTombPrice(overrides?: CallOverrides): Promise<BigNumber>;
+    getBombPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
     nextEpochPoint(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -157,7 +157,7 @@ export interface ITreasury extends BaseContract {
 
     epoch(overrides?: CallOverrides): Promise<BigNumber>;
 
-    getTombPrice(overrides?: CallOverrides): Promise<BigNumber>;
+    getBombPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
     nextEpochPoint(overrides?: CallOverrides): Promise<BigNumber>;
 
@@ -177,7 +177,7 @@ export interface ITreasury extends BaseContract {
 
     epoch(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    getTombPrice(overrides?: CallOverrides): Promise<PopulatedTransaction>;
+    getBombPrice(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     nextEpochPoint(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 

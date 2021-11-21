@@ -3,7 +3,7 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_tshare",
+        "name": "_bshare",
         "type": "address"
       },
       {
@@ -312,7 +312,7 @@
       },
       {
         "internalType": "uint256",
-        "name": "accTSharePerShare",
+        "name": "accBSharePerShare",
         "type": "uint256"
       },
       {
@@ -409,7 +409,7 @@
   },
   {
     "inputs": [],
-    "name": "tshare",
+    "name": "bshare",
     "outputs": [
       {
         "internalType": "contract IERC20",

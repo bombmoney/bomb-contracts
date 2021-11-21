@@ -1683,7 +1683,7 @@ babel-helper-regex@^6.24.1:
 babel-helper-remap-async-to-generator@^6.24.1:
   version "6.24.1"
   resolved "https://registry.yarnpkg.com/babel-helper-remap-async-to-generator/-/babel-helper-remap-async-to-generator-6.24.1.tgz#5ec581827ad723fecdd381f1c928390676e4551b"
-  integrity sha1-XsWBgnrXI/7N04HxySg5BnbkVRs=
+  integrity sha1-XsWBgnrXI/7N04HxySg5EthkVRs=
   dependencies:
     babel-helper-function-name "^6.24.1"
     babel-runtime "^6.22.0"
@@ -2331,7 +2331,7 @@ buffer-xor@^1.0.3:
 buffer-xor@^2.0.1:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/buffer-xor/-/buffer-xor-2.0.2.tgz#34f7c64f04c777a1f8aac5e661273bb9dd320289"
-  integrity sha512-eHslX0bin3GB+Lx2p7lEYRShRewuNZL3fUl4qlVJGGiwoPGftmt8JQgk2Y9Ji5/01TnVDo33E5b5O3vUB1HdqQ==
+  integrity sha512-eHslX0bin3GB+Lx2p7lEYRShRewuNZL3fUl4qlVJGGiwoPGetht8JQgk2Y9Ji5/01TnVDo33E5b5O3vUB1HdqQ==
   dependencies:
     safe-buffer "^5.1.1"
 

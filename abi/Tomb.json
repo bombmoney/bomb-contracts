@@ -150,7 +150,7 @@
   },
   {
     "inputs": [],
-    "name": "INITIAL_TOMB_POOL_DISTRIBUTION",
+    "name": "INITIAL_BOMB_POOL_DISTRIBUTION",
     "outputs": [
       {
         "internalType": "uint256",
@@ -338,7 +338,7 @@
       },
       {
         "internalType": "address",
-        "name": "_tombPool",
+        "name": "_bombPool",
         "type": "address"
       },
       {
@@ -714,11 +714,11 @@
     "inputs": [
       {
         "internalType": "address",
-        "name": "_tombOracle",
+        "name": "_bombOracle",
         "type": "address"
       }
     ],
-    "name": "setTombOracle",
+    "name": "setBombOracle",
     "outputs": [],
     "stateMutability": "nonpayable",
     "type": "function"
@@ -815,7 +815,7 @@
   },
   {
     "inputs": [],
-    "name": "tombOracle",
+    "name": "bombOracle",
     "outputs": [
       {
         "internalType": "address",

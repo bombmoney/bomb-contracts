@@ -7,15 +7,18 @@ module.exports = async function ({
 
     const { deployer, dev } = await getNamedAccounts();
 
-    const tomb = await ethers.getContract("Tomb");
+    const bomb = await ethers.getContract("Bomb");
 
 
-    
-    const pairAddress = "0xAbCCcecF9f24Af6d11470Ab36eF20004f3c9fbf1";
+    //testnet
+    //const pairAddress = "0x742957Dd7b4D4bB7177CF63B61Fd5f0f050Ebaa4";
+
+    //mainnnet
+    pairAddress = "0x84392649eb0bC1c1532F2180E58Bae4E1dAbd8D6";
 
     await deploy("Oracle", {
         from: deployer,
-        args: [pairAddress, 600, 1637280803],
+        args: [pairAddress, 21600, 1637306946],
         log: true,
         deterministicDeployment: false,
     });
