@@ -1,0 +1,411 @@
+{
+  "address": "0x2A637BEE0D76136d8ee44B96cf0A5f9198657AaF",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_bomb",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOperator",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOperator",
+          "type": "address"
+        }
+      ],
+      "name": "OperatorTransferred",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "bomb",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "disableAutoCalculateTax",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "enableAutoCalculateTax",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "excludeAddressFromTax",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "includeAddressInTax",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "isOperator",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "operator",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "renounceOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_burnThreshold",
+          "type": "uint256"
+        }
+      ],
+      "name": "setBurnThreshold",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_taxCollectorAddress",
+          "type": "address"
+        }
+      ],
+      "name": "setTaxCollectorAddress",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_taxRate",
+          "type": "uint256"
+        }
+      ],
+      "name": "setTaxRate",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_index",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "setTaxTiersRate",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_index",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_value",
+          "type": "uint256"
+        }
+      ],
+      "name": "setTaxTiersTwap",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_bombOracle",
+          "type": "address"
+        }
+      ],
+      "name": "setTaxableBombOracle",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOperator_",
+          "type": "address"
+        }
+      ],
+      "name": "transferOperator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_newTaxOffice",
+          "type": "address"
+        }
+      ],
+      "name": "transferTaxOffice",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xb70819379fbfe8a642141ea85914063e96c754ed567c0d99797d611d9328ea1a",
+  "receipt": {
+    "to": null,
+    "from": "0x0DCC098Fa701906a49c3196B1FD2464F4802F4E2",
+    "contractAddress": "0x2A637BEE0D76136d8ee44B96cf0A5f9198657AaF",
+    "transactionIndex": 182,
+    "gasUsed": "912977",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000800000000000000000000000000000000000000000000000000000000080000000000000001000000000000000000020000000000000000201000000000000000000000000000000000000028000000000000000000800000000000000000000000000000000400000000100000200000000000000000000000400000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020000000000000000000000000000020000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x148820fa299c2902ecfee9791728785ddc390223dbba0f4b3153fd531b29b212",
+    "transactionHash": "0xb70819379fbfe8a642141ea85914063e96c754ed567c0d99797d611d9328ea1a",
+    "logs": [
+      {
+        "transactionIndex": 182,
+        "blockNumber": 12881633,
+        "transactionHash": "0xb70819379fbfe8a642141ea85914063e96c754ed567c0d99797d611d9328ea1a",
+        "address": "0x2A637BEE0D76136d8ee44B96cf0A5f9198657AaF",
+        "topics": [
+          "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x0000000000000000000000000dcc098fa701906a49c3196b1fd2464f4802f4e2"
+        ],
+        "data": "0x",
+        "logIndex": 514,
+        "blockHash": "0x148820fa299c2902ecfee9791728785ddc390223dbba0f4b3153fd531b29b212"
+      },
+      {
+        "transactionIndex": 182,
+        "blockNumber": 12881633,
+        "transactionHash": "0xb70819379fbfe8a642141ea85914063e96c754ed567c0d99797d611d9328ea1a",
+        "address": "0x2A637BEE0D76136d8ee44B96cf0A5f9198657AaF",
+        "topics": [
+          "0x74da04524d50c64947f5dd5381ef1a4dca5cba8ed1d816243f9e48aa0b5617ed",
+          "0x0000000000000000000000000000000000000000000000000000000000000000",
+          "0x0000000000000000000000000dcc098fa701906a49c3196b1fd2464f4802f4e2"
+        ],
+        "data": "0x",
+        "logIndex": 515,
+        "blockHash": "0x148820fa299c2902ecfee9791728785ddc390223dbba0f4b3153fd531b29b212"
+      }
+    ],
+    "blockNumber": 12881633,
+    "cumulativeGasUsed": "26755430",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0x522348779DCb2911539e76A1042aA922F9C47Ee3"
+  ],
+  "solcInputHash": "406103f361ce90d01f909a5a5c9b2608",
+  "metadata": "{\"compiler\":{\"version\":\"0.6.12+commit.27d51765\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_bomb\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOperator\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOperator\",\"type\":\"address\"}],\"name\":\"OperatorTransferred\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[],\"name\":\"bomb\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"disableAutoCalculateTax\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"enableAutoCalculateTax\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"excludeAddressFromTax\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"includeAddressInTax\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isOperator\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"operator\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_burnThreshold\",\"type\":\"uint256\"}],\"name\":\"setBurnThreshold\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_taxCollectorAddress\",\"type\":\"address\"}],\"name\":\"setTaxCollectorAddress\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_taxRate\",\"type\":\"uint256\"}],\"name\":\"setTaxRate\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"_index\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"setTaxTiersRate\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint8\",\"name\":\"_index\",\"type\":\"uint8\"},{\"internalType\":\"uint256\",\"name\":\"_value\",\"type\":\"uint256\"}],\"name\":\"setTaxTiersTwap\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_bombOracle\",\"type\":\"address\"}],\"name\":\"setTaxableBombOracle\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOperator_\",\"type\":\"address\"}],\"name\":\"transferOperator\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_newTaxOffice\",\"type\":\"address\"}],\"name\":\"transferTaxOffice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/TaxOffice.sol\":\"TaxOffice\"},\"evmVersion\":\"istanbul\",\"libraries\":{\"__CACHE_BREAKER__\":\"0x00000000d41867734bbee4c6863d9255b2b06ac1\"},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/GSN/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.6.0 <0.8.0;\\n\\nimport \\\"../utils/Context.sol\\\";\\n\",\"keccak256\":\"0x9486045e189facd2e868ece35249872598ef03f1087fb6fa4d1161842daa2287\",\"license\":\"MIT\"},\"@openzeppelin/contracts/access/Ownable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.6.0 <0.8.0;\\n\\nimport \\\"../utils/Context.sol\\\";\\n/**\\n * @dev Contract module which provides a basic access control mechanism, where\\n * there is an account (an owner) that can be granted exclusive access to\\n * specific functions.\\n *\\n * By default, the owner account will be the one that deploys the contract. This\\n * can later be changed with {transferOwnership}.\\n *\\n * This module is used through inheritance. It will make available the modifier\\n * `onlyOwner`, which can be applied to your functions to restrict their use to\\n * the owner.\\n */\\nabstract contract Ownable is Context {\\n    address private _owner;\\n\\n    event OwnershipTransferred(address indexed previousOwner, address indexed newOwner);\\n\\n    /**\\n     * @dev Initializes the contract setting the deployer as the initial owner.\\n     */\\n    constructor () internal {\\n        address msgSender = _msgSender();\\n        _owner = msgSender;\\n        emit OwnershipTransferred(address(0), msgSender);\\n    }\\n\\n    /**\\n     * @dev Returns the address of the current owner.\\n     */\\n    function owner() public view virtual returns (address) {\\n        return _owner;\\n    }\\n\\n    /**\\n     * @dev Throws if called by any account other than the owner.\\n     */\\n    modifier onlyOwner() {\\n        require(owner() == _msgSender(), \\\"Ownable: caller is not the owner\\\");\\n        _;\\n    }\\n\\n    /**\\n     * @dev Leaves the contract without owner. It will not be possible to call\\n     * `onlyOwner` functions anymore. Can only be called by the current owner.\\n     *\\n     * NOTE: Renouncing ownership will leave the contract without an owner,\\n     * thereby removing any functionality that is only available to the owner.\\n     */\\n    function renounceOwnership() public virtual onlyOwner {\\n        emit OwnershipTransferred(_owner, address(0));\\n        _owner = address(0);\\n    }\\n\\n    /**\\n     * @dev Transfers ownership of the contract to a new account (`newOwner`).\\n     * Can only be called by the current owner.\\n     */\\n    function transferOwnership(address newOwner) public virtual onlyOwner {\\n        require(newOwner != address(0), \\\"Ownable: new owner is the zero address\\\");\\n        emit OwnershipTransferred(_owner, newOwner);\\n        _owner = newOwner;\\n    }\\n}\\n\",\"keccak256\":\"0x15e2d5bd4c28a88548074c54d220e8086f638a71ed07e6b3ba5a70066fcf458d\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/Context.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.6.0 <0.8.0;\\n\\n/*\\n * @dev Provides information about the current execution context, including the\\n * sender of the transaction and its data. While these are generally available\\n * via msg.sender and msg.data, they should not be accessed in such a direct\\n * manner, since when dealing with GSN meta-transactions the account sending and\\n * paying for execution may not be the actual sender (as far as an application\\n * is concerned).\\n *\\n * This contract is only required for intermediate, library-like contracts.\\n */\\nabstract contract Context {\\n    function _msgSender() internal view virtual returns (address payable) {\\n        return msg.sender;\\n    }\\n\\n    function _msgData() internal view virtual returns (bytes memory) {\\n        this; // silence state mutability warning without generating bytecode - see https://github.com/ethereum/solidity/issues/2691\\n        return msg.data;\\n    }\\n}\\n\",\"keccak256\":\"0x8d3cb350f04ff49cfb10aef08d87f19dcbaecc8027b0bed12f3275cd12f38cf0\",\"license\":\"MIT\"},\"contracts/TaxOffice.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.6.12;\\n\\nimport \\\"./owner/Operator.sol\\\";\\nimport \\\"./interfaces/ITaxable.sol\\\";\\n\\n/*\\n\\n$$$$$$$\\\\   $$$$$$\\\\  $$\\\\      $$\\\\ $$$$$$$\\\\                                                            \\n$$  __$$\\\\ $$  __$$\\\\ $$$\\\\    $$$ |$$  __$$\\\\                                                           \\n$$ |  $$ |$$ /  $$ |$$$$\\\\  $$$$ |$$ |  $$ |    $$$$$$\\\\$$$$\\\\   $$$$$$\\\\  $$$$$$$\\\\   $$$$$$\\\\  $$\\\\   $$\\\\ \\n$$$$$$$\\\\ |$$ |  $$ |$$\\\\$$\\\\$$ $$ |$$$$$$$\\\\ |    $$  _$$  _$$\\\\ $$  __$$\\\\ $$  __$$\\\\ $$  __$$\\\\ $$ |  $$ |\\n$$  __$$\\\\ $$ |  $$ |$$ \\\\$$$  $$ |$$  __$$\\\\     $$ / $$ / $$ |$$ /  $$ |$$ |  $$ |$$$$$$$$ |$$ |  $$ |\\n$$ |  $$ |$$ |  $$ |$$ |\\\\$  /$$ |$$ |  $$ |    $$ | $$ | $$ |$$ |  $$ |$$ |  $$ |$$   ____|$$ |  $$ |\\n$$$$$$$  | $$$$$$  |$$ | \\\\_/ $$ |$$$$$$$  |$$\\\\ $$ | $$ | $$ |\\\\$$$$$$  |$$ |  $$ |\\\\$$$$$$$\\\\ \\\\$$$$$$$ |\\n\\\\_______/  \\\\______/ \\\\__|     \\\\__|\\\\_______/ \\\\__|\\\\__| \\\\__| \\\\__| \\\\______/ \\\\__|  \\\\__| \\\\_______| \\\\____$$ |\\n                                                                                           $$\\\\   $$ |\\n                                                                                           \\\\$$$$$$  |\\n    http://bomb.money                                                                      \\\\______/ \\n*/\\ncontract TaxOffice is Operator {\\n    address public bomb;\\n\\n    constructor(address _bomb) public {\\n        require(_bomb != address(0), \\\"bomb address cannot be 0\\\");\\n        bomb = _bomb;\\n    }\\n\\n    function setTaxTiersTwap(uint8 _index, uint256 _value) public onlyOperator returns (bool) {\\n        return ITaxable(bomb).setTaxTiersTwap(_index, _value);\\n    }\\n\\n    function setTaxTiersRate(uint8 _index, uint256 _value) public onlyOperator returns (bool) {\\n        return ITaxable(bomb).setTaxTiersRate(_index, _value);\\n    }\\n\\n    function enableAutoCalculateTax() public onlyOperator {\\n        ITaxable(bomb).enableAutoCalculateTax();\\n    }\\n\\n    function disableAutoCalculateTax() public onlyOperator {\\n        ITaxable(bomb).disableAutoCalculateTax();\\n    }\\n\\n    function setTaxRate(uint256 _taxRate) public onlyOperator {\\n        ITaxable(bomb).setTaxRate(_taxRate);\\n    }\\n\\n    function setBurnThreshold(uint256 _burnThreshold) public onlyOperator {\\n        ITaxable(bomb).setBurnThreshold(_burnThreshold);\\n    }\\n\\n    function setTaxCollectorAddress(address _taxCollectorAddress) public onlyOperator {\\n        ITaxable(bomb).setTaxCollectorAddress(_taxCollectorAddress);\\n    }\\n\\n    function excludeAddressFromTax(address _address) external onlyOperator returns (bool) {\\n        return ITaxable(bomb).excludeAddress(_address);\\n    }\\n\\n    function includeAddressInTax(address _address) external onlyOperator returns (bool) {\\n        return ITaxable(bomb).includeAddress(_address);\\n    }\\n\\n    function setTaxableBombOracle(address _bombOracle) external onlyOperator {\\n        ITaxable(bomb).setBombOracle(_bombOracle);\\n    }\\n\\n    function transferTaxOffice(address _newTaxOffice) external onlyOperator {\\n        ITaxable(bomb).setTaxOffice(_newTaxOffice);\\n    }\\n}\\n\",\"keccak256\":\"0x14768dd2917c3e319bd09d252fc47c326d9cf915c83e13e3dcf94e66bfc1c3fd\",\"license\":\"MIT\"},\"contracts/interfaces/ITaxable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.6.12;\\n\\ninterface ITaxable {\\n    function setTaxTiersTwap(uint8 _index, uint256 _value) external returns (bool);\\n\\n    function setTaxTiersRate(uint8 _index, uint256 _value) external returns (bool);\\n\\n    function enableAutoCalculateTax() external;\\n\\n    function disableAutoCalculateTax() external;\\n\\n    function taxRate() external returns (uint256);\\n\\n    function setTaxCollectorAddress(address _taxCollectorAddress) external;\\n\\n    function setTaxRate(uint256 _taxRate) external;\\n\\n    function setBurnThreshold(uint256 _burnThreshold) external;\\n\\n    function excludeAddress(address _address) external returns (bool);\\n\\n    function isAddressExcluded(address _address) external returns (bool);\\n\\n    function includeAddress(address _address) external returns (bool);\\n\\n    function setBombOracle(address _bombOracle) external;\\n\\n    function setTaxOffice(address _taxOffice) external;\\n}\\n\",\"keccak256\":\"0xfda9cc174bf884beec258b2b30ad68404fa98a070c814b4f67c63eb55fe27a70\",\"license\":\"MIT\"},\"contracts/owner/Operator.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity 0.6.12;\\n\\nimport \\\"@openzeppelin/contracts/GSN/Context.sol\\\";\\nimport \\\"@openzeppelin/contracts/access/Ownable.sol\\\";\\n\\ncontract Operator is Context, Ownable {\\n    address private _operator;\\n\\n    event OperatorTransferred(address indexed previousOperator, address indexed newOperator);\\n\\n    constructor() internal {\\n        _operator = _msgSender();\\n        emit OperatorTransferred(address(0), _operator);\\n    }\\n\\n    function operator() public view returns (address) {\\n        return _operator;\\n    }\\n\\n    modifier onlyOperator() {\\n        require(_operator == msg.sender, \\\"operator: caller is not the operator\\\");\\n        _;\\n    }\\n\\n    function isOperator() public view returns (bool) {\\n        return _msgSender() == _operator;\\n    }\\n\\n    function transferOperator(address newOperator_) public onlyOwner {\\n        _transferOperator(newOperator_);\\n    }\\n\\n    function _transferOperator(address newOperator_) internal {\\n        require(newOperator_ != address(0), \\\"operator: zero address given for new operator\\\");\\n        emit OperatorTransferred(address(0), newOperator_);\\n        _operator = newOperator_;\\n    }\\n}\\n\",\"keccak256\":\"0x1ae1bc52c72e3ad2fc80f7863e454f2bff37b902fa1ad639859681369e9b82db\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b50604051610fb1380380610fb18339818101604052602081101561003357600080fd5b5051600061003f61015d565b600080546001600160a01b0319166001600160a01b0383169081178255604051929350917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908290a35061009161015d565b600180546001600160a01b0319166001600160a01b0392831617908190556040519116906000907f74da04524d50c64947f5dd5381ef1a4dca5cba8ed1d816243f9e48aa0b5617ed908290a36001600160a01b038116610138576040805162461bcd60e51b815260206004820152601860248201527f626f6d6220616464726573732063616e6e6f7420626520300000000000000000604482015290519081900360640190fd5b600280546001600160a01b0319166001600160a01b0392909216919091179055610161565b3390565b610e41806101706000396000f3fe608060405234801561001057600080fd5b50600436106101165760003560e01c80638da5cb5b116100a2578063be94f86b11610071578063be94f86b1461027e578063c6d69a30146102a4578063d1d31a37146102c1578063f2fde38b146102e7578063ff87fc7c1461030d57610116565b80638da5cb5b1461022b5780639d6b5f2114610233578063b1b0c49e14610250578063b87c5a4a1461025857610116565b8063570ca735116100e9578063570ca735146101ab57806365bbacd9146101cf57806366206ce9146101d757806369356d47146101fd578063715018a61461022357610116565b806319db099d1461011b5780631ba1f8351461015557806329605e771461017d5780634456eda2146101a3575b600080fd5b6101416004803603602081101561013157600080fd5b50356001600160a01b0316610315565b604080519115158252519081900360200190f35b61017b6004803603602081101561016b57600080fd5b50356001600160a01b03166103e2565b005b61017b6004803603602081101561019357600080fd5b50356001600160a01b0316610494565b610141610514565b6101b361053a565b604080516001600160a01b039092168252519081900360200190f35b61017b610549565b610141600480360360408110156101ed57600080fd5b5060ff81351690602001356105fc565b61017b6004803603602081101561021357600080fd5b50356001600160a01b03166106d2565b61017b610769565b6101b3610827565b61017b6004803603602081101561024957600080fd5b5035610836565b6101b36108cc565b6101416004803603604081101561026e57600080fd5b5060ff81351690602001356108db565b6101416004803603602081101561029457600080fd5b50356001600160a01b031661097e565b61017b600480360360208110156102ba57600080fd5b5035610a19565b61017b600480360360208110156102d757600080fd5b50356001600160a01b0316610aaf565b61017b600480360360208110156102fd57600080fd5b50356001600160a01b0316610b46565b61017b610c5a565b6001546000906001600160a01b031633146103615760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b600254604080516393995d4b60e01b81526001600160a01b038581166004830152915191909216916393995d4b9160248083019260209291908290030181600087803b1580156103b057600080fd5b505af11580156103c4573d6000803e3d6000fd5b505050506040513d60208110156103da57600080fd5b505192915050565b6001546001600160a01b0316331461042b5760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b600254604080516365f98a4f60e11b81526001600160a01b0384811660048301529151919092169163cbf3149e91602480830192600092919082900301818387803b15801561047957600080fd5b505af115801561048d573d6000803e3d6000fd5b5050505050565b61049c610cf3565b6001600160a01b03166104ad610827565b6001600160a01b031614610508576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b61051181610cf7565b50565b6001546000906001600160a01b031661052b610cf3565b6001600160a01b031614905090565b6001546001600160a01b031690565b6001546001600160a01b031633146105925760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b600260009054906101000a90046001600160a01b03166001600160a01b03166365bbacd96040518163ffffffff1660e01b8152600401600060405180830381600087803b1580156105e257600080fd5b505af11580156105f6573d6000803e3d6000fd5b50505050565b6001546000906001600160a01b031633146106485760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b600254604080516366206ce960e01b815260ff861660048201526024810185905290516001600160a01b03909216916366206ce9916044808201926020929091908290030181600087803b15801561069f57600080fd5b505af11580156106b3573d6000803e3d6000fd5b505050506040513d60208110156106c957600080fd5b50519392505050565b6001546001600160a01b0316331461071b5760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b600254604080516369356d4760e01b81526001600160a01b038481166004830152915191909216916369356d4791602480830192600092919082900301818387803b15801561047957600080fd5b610771610cf3565b6001600160a01b0316610782610827565b6001600160a01b0316146107dd576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b600080546040516001600160a01b03909116907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908390a3600080546001600160a01b0319169055565b6000546001600160a01b031690565b6001546001600160a01b0316331461087f5760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b60025460408051639d6b5f2160e01b81526004810184905290516001600160a01b0390921691639d6b5f219160248082019260009290919082900301818387803b15801561047957600080fd5b6002546001600160a01b031681565b6001546000906001600160a01b031633146109275760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b60025460408051635c3e2d2560e11b815260ff861660048201526024810185905290516001600160a01b039092169163b87c5a4a916044808201926020929091908290030181600087803b15801561069f57600080fd5b6001546000906001600160a01b031633146109ca5760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b60025460408051631bac736760e11b81526001600160a01b03858116600483015291519190921691633758e6ce9160248083019260209291908290030181600087803b1580156103b057600080fd5b6001546001600160a01b03163314610a625760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b60025460408051630c6d69a360e41b81526004810184905290516001600160a01b039092169163c6d69a309160248082019260009290919082900301818387803b15801561047957600080fd5b6001546001600160a01b03163314610af85760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b60025460408051631f83ebb560e11b81526001600160a01b03848116600483015291519190921691633f07d76a91602480830192600092919082900301818387803b15801561047957600080fd5b610b4e610cf3565b6001600160a01b0316610b5f610827565b6001600160a01b031614610bba576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b6001600160a01b038116610bff5760405162461bcd60e51b8152600401808060200182810382526026815260200180610d956026913960400191505060405180910390fd5b600080546040516001600160a01b03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080546001600160a01b0319166001600160a01b0392909216919091179055565b6001546001600160a01b03163314610ca35760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b600260009054906101000a90046001600160a01b03166001600160a01b031663ff87fc7c6040518163ffffffff1660e01b8152600401600060405180830381600087803b1580156105e257600080fd5b3390565b6001600160a01b038116610d3c5760405162461bcd60e51b815260040180806020018281038252602d815260200180610dbb602d913960400191505060405180910390fd5b6040516001600160a01b038216906000907f74da04524d50c64947f5dd5381ef1a4dca5cba8ed1d816243f9e48aa0b5617ed908290a3600180546001600160a01b0319166001600160a01b039290921691909117905556fe4f776e61626c653a206e6577206f776e657220697320746865207a65726f20616464726573736f70657261746f723a207a65726f206164647265737320676976656e20666f72206e6577206f70657261746f726f70657261746f723a2063616c6c6572206973206e6f7420746865206f70657261746f72a264697066735822122049b7aac565b07b0409c97f6c618d676d5d2228ea23a81a40f8137a571c8eed6964736f6c634300060c0033",
+  "deployedBytecode": "0x608060405234801561001057600080fd5b50600436106101165760003560e01c80638da5cb5b116100a2578063be94f86b11610071578063be94f86b1461027e578063c6d69a30146102a4578063d1d31a37146102c1578063f2fde38b146102e7578063ff87fc7c1461030d57610116565b80638da5cb5b1461022b5780639d6b5f2114610233578063b1b0c49e14610250578063b87c5a4a1461025857610116565b8063570ca735116100e9578063570ca735146101ab57806365bbacd9146101cf57806366206ce9146101d757806369356d47146101fd578063715018a61461022357610116565b806319db099d1461011b5780631ba1f8351461015557806329605e771461017d5780634456eda2146101a3575b600080fd5b6101416004803603602081101561013157600080fd5b50356001600160a01b0316610315565b604080519115158252519081900360200190f35b61017b6004803603602081101561016b57600080fd5b50356001600160a01b03166103e2565b005b61017b6004803603602081101561019357600080fd5b50356001600160a01b0316610494565b610141610514565b6101b361053a565b604080516001600160a01b039092168252519081900360200190f35b61017b610549565b610141600480360360408110156101ed57600080fd5b5060ff81351690602001356105fc565b61017b6004803603602081101561021357600080fd5b50356001600160a01b03166106d2565b61017b610769565b6101b3610827565b61017b6004803603602081101561024957600080fd5b5035610836565b6101b36108cc565b6101416004803603604081101561026e57600080fd5b5060ff81351690602001356108db565b6101416004803603602081101561029457600080fd5b50356001600160a01b031661097e565b61017b600480360360208110156102ba57600080fd5b5035610a19565b61017b600480360360208110156102d757600080fd5b50356001600160a01b0316610aaf565b61017b600480360360208110156102fd57600080fd5b50356001600160a01b0316610b46565b61017b610c5a565b6001546000906001600160a01b031633146103615760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b600254604080516393995d4b60e01b81526001600160a01b038581166004830152915191909216916393995d4b9160248083019260209291908290030181600087803b1580156103b057600080fd5b505af11580156103c4573d6000803e3d6000fd5b505050506040513d60208110156103da57600080fd5b505192915050565b6001546001600160a01b0316331461042b5760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b600254604080516365f98a4f60e11b81526001600160a01b0384811660048301529151919092169163cbf3149e91602480830192600092919082900301818387803b15801561047957600080fd5b505af115801561048d573d6000803e3d6000fd5b5050505050565b61049c610cf3565b6001600160a01b03166104ad610827565b6001600160a01b031614610508576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b61051181610cf7565b50565b6001546000906001600160a01b031661052b610cf3565b6001600160a01b031614905090565b6001546001600160a01b031690565b6001546001600160a01b031633146105925760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b600260009054906101000a90046001600160a01b03166001600160a01b03166365bbacd96040518163ffffffff1660e01b8152600401600060405180830381600087803b1580156105e257600080fd5b505af11580156105f6573d6000803e3d6000fd5b50505050565b6001546000906001600160a01b031633146106485760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b600254604080516366206ce960e01b815260ff861660048201526024810185905290516001600160a01b03909216916366206ce9916044808201926020929091908290030181600087803b15801561069f57600080fd5b505af11580156106b3573d6000803e3d6000fd5b505050506040513d60208110156106c957600080fd5b50519392505050565b6001546001600160a01b0316331461071b5760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b600254604080516369356d4760e01b81526001600160a01b038481166004830152915191909216916369356d4791602480830192600092919082900301818387803b15801561047957600080fd5b610771610cf3565b6001600160a01b0316610782610827565b6001600160a01b0316146107dd576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b600080546040516001600160a01b03909116907f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0908390a3600080546001600160a01b0319169055565b6000546001600160a01b031690565b6001546001600160a01b0316331461087f5760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b60025460408051639d6b5f2160e01b81526004810184905290516001600160a01b0390921691639d6b5f219160248082019260009290919082900301818387803b15801561047957600080fd5b6002546001600160a01b031681565b6001546000906001600160a01b031633146109275760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b60025460408051635c3e2d2560e11b815260ff861660048201526024810185905290516001600160a01b039092169163b87c5a4a916044808201926020929091908290030181600087803b15801561069f57600080fd5b6001546000906001600160a01b031633146109ca5760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b60025460408051631bac736760e11b81526001600160a01b03858116600483015291519190921691633758e6ce9160248083019260209291908290030181600087803b1580156103b057600080fd5b6001546001600160a01b03163314610a625760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b60025460408051630c6d69a360e41b81526004810184905290516001600160a01b039092169163c6d69a309160248082019260009290919082900301818387803b15801561047957600080fd5b6001546001600160a01b03163314610af85760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b60025460408051631f83ebb560e11b81526001600160a01b03848116600483015291519190921691633f07d76a91602480830192600092919082900301818387803b15801561047957600080fd5b610b4e610cf3565b6001600160a01b0316610b5f610827565b6001600160a01b031614610bba576040805162461bcd60e51b815260206004820181905260248201527f4f776e61626c653a2063616c6c6572206973206e6f7420746865206f776e6572604482015290519081900360640190fd5b6001600160a01b038116610bff5760405162461bcd60e51b8152600401808060200182810382526026815260200180610d956026913960400191505060405180910390fd5b600080546040516001600160a01b03808516939216917f8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e091a3600080546001600160a01b0319166001600160a01b0392909216919091179055565b6001546001600160a01b03163314610ca35760405162461bcd60e51b8152600401808060200182810382526024815260200180610de86024913960400191505060405180910390fd5b600260009054906101000a90046001600160a01b03166001600160a01b031663ff87fc7c6040518163ffffffff1660e01b8152600401600060405180830381600087803b1580156105e257600080fd5b3390565b6001600160a01b038116610d3c5760405162461bcd60e51b815260040180806020018281038252602d815260200180610dbb602d913960400191505060405180910390fd5b6040516001600160a01b038216906000907f74da04524d50c64947f5dd5381ef1a4dca5cba8ed1d816243f9e48aa0b5617ed908290a3600180546001600160a01b0319166001600160a01b039290921691909117905556fe4f776e61626c653a206e6577206f776e657220697320746865207a65726f20616464726573736f70657261746f723a207a65726f206164647265737320676976656e20666f72206e6577206f70657261746f726f70657261746f723a2063616c6c6572206973206e6f7420746865206f70657261746f72a264697066735822122049b7aac565b07b0409c97f6c618d676d5d2228ea23a81a40f8137a571c8eed6964736f6c634300060c0033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "owner()": {
+        "details": "Returns the address of the current owner."
+      },
+      "renounceOwnership()": {
+        "details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner."
+      },
+      "transferOwnership(address)": {
+        "details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 10,
+        "contract": "contracts/TaxOffice.sol:TaxOffice",
+        "label": "_owner",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_address"
+      },
+      {
+        "astId": 13314,
+        "contract": "contracts/TaxOffice.sol:TaxOffice",
+        "label": "_operator",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_address"
+      },
+      {
+        "astId": 4413,
+        "contract": "contracts/TaxOffice.sol:TaxOffice",
+        "label": "bomb",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_address"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      }
+    }
+  }
+}
