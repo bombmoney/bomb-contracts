@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: MIT
+
 /*
 
 $$$$$$$\   $$$$$$\  $$\      $$\ $$$$$$$\                                                            
@@ -13,7 +15,6 @@ $$$$$$$  | $$$$$$  |$$ | \_/ $$ |$$$$$$$  |$$\ $$ | $$ | $$ |\$$$$$$  |$$ |  $$ 
     http://bomb.money                                                                      \______/ 
 */
 
-// SPDX-License-Identifier: MIT
 
 pragma solidity >=0.6.0 <0.8.0;
 
@@ -966,6 +967,8 @@ interface IBoardroom {
 
 pragma solidity 0.6.12;
 
+
+
 contract Treasury is ContractGuard {
     using SafeERC20 for IERC20;
     using Address for address;
@@ -1152,7 +1155,7 @@ contract Treasury is ContractGuard {
                 // no discount
                 _rate = bombPriceOne;
             } else {
-                uint256 _bondAmount = bombPriceOne.mul(1e14).div(_bombPrice); // to burn 1 BOMB
+                uint256 _bondAmount = bombPriceOne.mul(1e18).div(_bombPrice); // to burn 1 BOMB
                 uint256 _discountAmount = _bondAmount.sub(bombPriceOne).mul(discountPercent).div(10000);
                 _rate = bombPriceOne.add(_discountAmount);
                 if (maxDiscountRate > 0 && _rate > maxDiscountRate) {

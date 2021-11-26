@@ -190,7 +190,7 @@ contract Treasury is ContractGuard {
             uint256 _bondSupply = IERC20(bbond).totalSupply();
             if (_bondMaxSupply > _bondSupply) {
                 uint256 _maxMintableBond = _bondMaxSupply.sub(_bondSupply);
-                uint256 _maxBurnableBomb = _maxMintableBond.mul(_bombPrice).div(1e18);
+                uint256 _maxBurnableBomb = _maxMintableBond.mul(_bombPrice).div(1e14);
                 _burnableBombLeft = Math.min(epochSupplyContractionLeft, _maxBurnableBomb);
             }
         }
@@ -202,7 +202,7 @@ contract Treasury is ContractGuard {
             uint256 _totalBomb = IERC20(bomb).balanceOf(address(this));
             uint256 _rate = getBondPremiumRate();
             if (_rate > 0) {
-                _redeemableBonds = _totalBomb.mul(1e18).div(_rate);
+                _redeemableBonds = _totalBomb.mul(1e14).div(_rate);
             }
         }
     }
@@ -429,7 +429,7 @@ contract Treasury is ContractGuard {
         uint256 _rate = getBondDiscountRate();
         require(_rate > 0, "Treasury: invalid bond rate");
 
-        uint256 _bondAmount = _bombAmount.mul(_rate).div(1e18);
+        uint256 _bondAmount = _bombAmount.mul(_rate).div(1e14);
         uint256 bombSupply = getBombCirculatingSupply();
         uint256 newBondSupply = IERC20(bbond).totalSupply().add(_bondAmount);
         require(newBondSupply <= bombSupply.mul(maxDebtRatioPercent).div(10000), "over max debt ratio");
@@ -456,7 +456,7 @@ contract Treasury is ContractGuard {
         uint256 _rate = getBondPremiumRate();
         require(_rate > 0, "Treasury: invalid bond rate");
 
-        uint256 _bombAmount = _bondAmount.mul(_rate).div(1e18);
+        uint256 _bombAmount = _bondAmount.mul(_rate).div(1e14);
         require(IERC20(bomb).balanceOf(address(this)) >= _bombAmount, "Treasury: treasury has no more budget");
 
         seigniorageSaved = seigniorageSaved.sub(Math.min(seigniorageSaved, _bombAmount));

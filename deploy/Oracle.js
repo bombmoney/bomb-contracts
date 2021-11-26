@@ -14,11 +14,11 @@ module.exports = async function ({
     //const pairAddress = "0x742957Dd7b4D4bB7177CF63B61Fd5f0f050Ebaa4";
 
     //mainnnet
-    pairAddress = "0x84392649eb0bC1c1532F2180E58Bae4E1dAbd8D6";
+    pairAddress = "0xB6E85031F313563bF12ea414118978C8BD78db5D";
 
     await deploy("Oracle", {
         from: deployer,
-        args: [pairAddress, 21600, 1637306946],
+        args: [pairAddress, 21600, 1637708400],
         log: true,
         deterministicDeployment: false,
     });
