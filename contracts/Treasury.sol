@@ -271,13 +271,13 @@ contract Treasury is ContractGuard {
         bondDepletionFloorPercent = 10000; // 100% of Bond supply for depletion floor
         seigniorageExpansionFloorPercent = 3500; // At least 35% of expansion reserved for boardroom
         maxSupplyContractionPercent = 300; // Upto 3.0% supply for contraction (to burn BOMB and mint tBOND)
-        maxDebtRatioPercent = 3500; // Upto 35% supply of tBOND to purchase
+        maxDebtRatioPercent = 4500; // Upto 35% supply of tBOND to purchase
 
         premiumThreshold = 110;
         premiumPercent = 7000;
 
         // First 28 epochs with 4.5% expansion
-        bootstrapEpochs = 28;
+        bootstrapEpochs = 0;
         bootstrapSupplyExpansionPercent = 450;
 
         // set seigniorageSaved to it's balance
@@ -524,10 +524,10 @@ contract Treasury is ContractGuard {
                 }
                 if (seigniorageSaved >= bondSupply.mul(bondDepletionFloorPercent).div(10000)) {
                     // saved enough to pay debt, mint as usual rate
-                    _savedForBoardroom = bombSupply.mul(_percentage).div(1e18);
+                    _savedForBoardroom = bombSupply.mul(_percentage).div(1e14);
                 } else {
                     // have not saved enough to pay debt, mint more
-                    uint256 _seigniorage = bombSupply.mul(_percentage).div(1e18);
+                    uint256 _seigniorage = bombSupply.mul(_percentage).div(1e14);
                     _savedForBoardroom = _seigniorage.mul(seigniorageExpansionFloorPercent).div(10000);
                     _savedForBond = _seigniorage.sub(_savedForBoardroom);
                     if (mintingFactorForPayingDebt > 0) {

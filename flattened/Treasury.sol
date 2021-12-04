@@ -966,6 +966,7 @@ interface IBoardroom {
 
 pragma solidity 0.6.12;
 
+
 contract Treasury is ContractGuard {
     using SafeERC20 for IERC20;
     using Address for address;
@@ -1152,7 +1153,7 @@ contract Treasury is ContractGuard {
                 // no discount
                 _rate = bombPriceOne;
             } else {
-                uint256 _bondAmount = bombPriceOne.mul(1e14).div(_bombPrice); // to burn 1 BOMB
+                uint256 _bondAmount = bombPriceOne.mul(1e18).div(_bombPrice); // to burn 1 BOMB
                 uint256 _discountAmount = _bondAmount.sub(bombPriceOne).mul(discountPercent).div(10000);
                 _rate = bombPriceOne.add(_discountAmount);
                 if (maxDiscountRate > 0 && _rate > maxDiscountRate) {
@@ -1209,13 +1210,13 @@ contract Treasury is ContractGuard {
         bondDepletionFloorPercent = 10000; // 100% of Bond supply for depletion floor
         seigniorageExpansionFloorPercent = 3500; // At least 35% of expansion reserved for boardroom
         maxSupplyContractionPercent = 300; // Upto 3.0% supply for contraction (to burn BOMB and mint tBOND)
-        maxDebtRatioPercent = 3500; // Upto 35% supply of tBOND to purchase
+        maxDebtRatioPercent = 4500; // Upto 35% supply of tBOND to purchase
 
         premiumThreshold = 110;
         premiumPercent = 7000;
 
         // First 28 epochs with 4.5% expansion
-        bootstrapEpochs = 28;
+        bootstrapEpochs = 0;
         bootstrapSupplyExpansionPercent = 450;
 
         // set seigniorageSaved to it's balance
@@ -1456,7 +1457,7 @@ contract Treasury is ContractGuard {
                 uint256 _percentage = previousEpochBombPrice.sub(bombPriceOne);
                 uint256 _savedForBond;
                 uint256 _savedForBoardroom;
-                uint256 _mse = _calculateMaxSupplyExpansionPercent(bombSupply).mul(1e14);
+                uint256 _mse = _calculateMaxSupplyExpansionPercent(bombSupply).mul(1e18);
                 if (_percentage > _mse) {
                     _percentage = _mse;
                 }
